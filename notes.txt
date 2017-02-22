@@ -1,0 +1,3 @@
+- Build a city with vertices and weighted edges (http://cpsc.ualr.edu/srini/DM/chapters/review5.3.html)
+- Determine type of network to use (https://github.com/collinhundley/Swift-AI)
+	- Use matrix as output with a 1 signifying part of the path, 0 signifying not part of the path
