@@ -1,0 +1,305 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D9B6BB5C1E5E3862009238E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B6BB5B1E5E3862009238E2 /* AppDelegate.swift */; };
+		D9B6BB5E1E5E3862009238E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B6BB5D1E5E3862009238E2 /* ViewController.swift */; };
+		D9B6BB601E5E3862009238E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9B6BB5F1E5E3862009238E2 /* Assets.xcassets */; };
+		D9B6BB631E5E3862009238E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9B6BB611E5E3862009238E2 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D9B6BB581E5E3862009238E2 /* neural-network-navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "neural-network-navigation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9B6BB5B1E5E3862009238E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D9B6BB5D1E5E3862009238E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D9B6BB5F1E5E3862009238E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D9B6BB621E5E3862009238E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D9B6BB641E5E3862009238E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D9B6BB551E5E3862009238E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D9B6BB4F1E5E3862009238E2 = {
+			isa = PBXGroup;
+			children = (
+				D9B6BB5A1E5E3862009238E2 /* neural-network-navigation */,
+				D9B6BB591E5E3862009238E2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D9B6BB591E5E3862009238E2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D9B6BB581E5E3862009238E2 /* neural-network-navigation.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D9B6BB5A1E5E3862009238E2 /* neural-network-navigation */ = {
+			isa = PBXGroup;
+			children = (
+				D9B6BB5B1E5E3862009238E2 /* AppDelegate.swift */,
+				D9B6BB5F1E5E3862009238E2 /* Assets.xcassets */,
+				D9B6BB6A1E5E38AB009238E2 /* UI */,
+				D9B6BB641E5E3862009238E2 /* Info.plist */,
+			);
+			path = "neural-network-navigation";
+			sourceTree = "<group>";
+		};
+		D9B6BB6A1E5E38AB009238E2 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D9B6BB5D1E5E3862009238E2 /* ViewController.swift */,
+				D9B6BB611E5E3862009238E2 /* Main.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D9B6BB571E5E3862009238E2 /* neural-network-navigation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9B6BB671E5E3862009238E2 /* Build configuration list for PBXNativeTarget "neural-network-navigation" */;
+			buildPhases = (
+				D9B6BB541E5E3862009238E2 /* Sources */,
+				D9B6BB551E5E3862009238E2 /* Frameworks */,
+				D9B6BB561E5E3862009238E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "neural-network-navigation";
+			productName = "neural-network-navigation";
+			productReference = D9B6BB581E5E3862009238E2 /* neural-network-navigation.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D9B6BB501E5E3862009238E2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Psych186B;
+				TargetAttributes = {
+					D9B6BB571E5E3862009238E2 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = D7S2KUY3DK;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = D9B6BB531E5E3862009238E2 /* Build configuration list for PBXProject "neural-network-navigation" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D9B6BB4F1E5E3862009238E2;
+			productRefGroup = D9B6BB591E5E3862009238E2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D9B6BB571E5E3862009238E2 /* neural-network-navigation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D9B6BB561E5E3862009238E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9B6BB601E5E3862009238E2 /* Assets.xcassets in Resources */,
+				D9B6BB631E5E3862009238E2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D9B6BB541E5E3862009238E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9B6BB5E1E5E3862009238E2 /* ViewController.swift in Sources */,
+				D9B6BB5C1E5E3862009238E2 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D9B6BB611E5E3862009238E2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9B6BB621E5E3862009238E2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D9B6BB651E5E3862009238E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D9B6BB661E5E3862009238E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		D9B6BB681E5E3862009238E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = D7S2KUY3DK;
+				INFOPLIST_FILE = "neural-network-navigation/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.psych186b.austinmchau.neural-network-navigation";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		D9B6BB691E5E3862009238E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = D7S2KUY3DK;
+				INFOPLIST_FILE = "neural-network-navigation/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.psych186b.austinmchau.neural-network-navigation";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D9B6BB531E5E3862009238E2 /* Build configuration list for PBXProject "neural-network-navigation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9B6BB651E5E3862009238E2 /* Debug */,
+				D9B6BB661E5E3862009238E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9B6BB671E5E3862009238E2 /* Build configuration list for PBXNativeTarget "neural-network-navigation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9B6BB681E5E3862009238E2 /* Debug */,
+				D9B6BB691E5E3862009238E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D9B6BB501E5E3862009238E2 /* Project object */;
+}
