@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C5D37E91E60BAEF0011713A /* FFNN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37E21E60BAEF0011713A /* FFNN.swift */; };
+		6C5D37EA1E60BAEF0011713A /* FFNN+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37E31E60BAEF0011713A /* FFNN+Storage.swift */; };
+		6C5D37EB1E60BAEF0011713A /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37E41E60BAEF0011713A /* Matrix.swift */; };
+		6C5D37EC1E60BAEF0011713A /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37E51E60BAEF0011713A /* Operations.swift */; };
+		6C5D37ED1E60BAEF0011713A /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37E61E60BAEF0011713A /* Random.swift */; };
+		6C5D37EE1E60BAEF0011713A /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37E71E60BAEF0011713A /* Storage.swift */; };
+		6C5D37EF1E60BAEF0011713A /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37E81E60BAEF0011713A /* Vector.swift */; };
+		6C5D37F11E60BCA10011713A /* CityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37F01E60BCA10011713A /* CityBuilder.swift */; };
 		D9B6BB5C1E5E3862009238E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B6BB5B1E5E3862009238E2 /* AppDelegate.swift */; };
 		D9B6BB5E1E5E3862009238E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B6BB5D1E5E3862009238E2 /* ViewController.swift */; };
 		D9B6BB601E5E3862009238E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9B6BB5F1E5E3862009238E2 /* Assets.xcassets */; };
@@ -15,6 +23,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C5D37E21E60BAEF0011713A /* FFNN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFNN.swift; sourceTree = "<group>"; };
+		6C5D37E31E60BAEF0011713A /* FFNN+Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FFNN+Storage.swift"; sourceTree = "<group>"; };
+		6C5D37E41E60BAEF0011713A /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		6C5D37E51E60BAEF0011713A /* Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		6C5D37E61E60BAEF0011713A /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		6C5D37E71E60BAEF0011713A /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		6C5D37E81E60BAEF0011713A /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		6C5D37F01E60BCA10011713A /* CityBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityBuilder.swift; sourceTree = "<group>"; };
 		D9B6BB581E5E3862009238E2 /* neural-network-navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "neural-network-navigation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B6BB5B1E5E3862009238E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B6BB5D1E5E3862009238E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +51,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6CE51F6B1E60B3ED0080E9D9 /* Neural Network */ = {
+			isa = PBXGroup;
+			children = (
+				6C5D37E21E60BAEF0011713A /* FFNN.swift */,
+				6C5D37E31E60BAEF0011713A /* FFNN+Storage.swift */,
+				6C5D37E41E60BAEF0011713A /* Matrix.swift */,
+				6C5D37E51E60BAEF0011713A /* Operations.swift */,
+				6C5D37E61E60BAEF0011713A /* Random.swift */,
+				6C5D37E71E60BAEF0011713A /* Storage.swift */,
+				6C5D37E81E60BAEF0011713A /* Vector.swift */,
+			);
+			name = "Neural Network";
+			sourceTree = "<group>";
+		};
 		D9B6BB4F1E5E3862009238E2 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +105,7 @@
 		D9B6BB6B1E5E3A19009238E2 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				6CE51F6B1E60B3ED0080E9D9 /* Neural Network */,
 				D9BE3F731E60ADFF0011D471 /* City */,
 			);
 			name = Backend;
@@ -84,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				D9BE3F741E60AE250011D471 /* CityGenerator.swift */,
+				6C5D37F01E60BCA10011713A /* CityBuilder.swift */,
 			);
 			name = City;
 			sourceTree = "<group>";
@@ -160,7 +192,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C5D37ED1E60BAEF0011713A /* Random.swift in Sources */,
+				6C5D37F11E60BCA10011713A /* CityBuilder.swift in Sources */,
 				D9B6BB5E1E5E3862009238E2 /* ViewController.swift in Sources */,
+				6C5D37EF1E60BAEF0011713A /* Vector.swift in Sources */,
+				6C5D37EA1E60BAEF0011713A /* FFNN+Storage.swift in Sources */,
+				6C5D37EB1E60BAEF0011713A /* Matrix.swift in Sources */,
+				6C5D37EC1E60BAEF0011713A /* Operations.swift in Sources */,
+				6C5D37EE1E60BAEF0011713A /* Storage.swift in Sources */,
+				6C5D37E91E60BAEF0011713A /* FFNN.swift in Sources */,
 				D9B6BB5C1E5E3862009238E2 /* AppDelegate.swift in Sources */,
 				D9BE3F751E60AE250011D471 /* CityGenerator.swift in Sources */,
 			);
