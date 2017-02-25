@@ -20,6 +20,7 @@
 		D9B6BB601E5E3862009238E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9B6BB5F1E5E3862009238E2 /* Assets.xcassets */; };
 		D9B6BB631E5E3862009238E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9B6BB611E5E3862009238E2 /* Main.storyboard */; };
 		D9BE3F751E60AE250011D471 /* CityGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BE3F741E60AE250011D471 /* CityGenerator.swift */; };
+		D9BE3F781E6117BC0011D471 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BE3F771E6117BC0011D471 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D9B6BB621E5E3862009238E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D9B6BB641E5E3862009238E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9BE3F741E60AE250011D471 /* CityGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityGenerator.swift; sourceTree = "<group>"; };
+		D9BE3F771E6117BC0011D471 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				D9B6BB5F1E5E3862009238E2 /* Assets.xcassets */,
 				D9B6BB6A1E5E38AB009238E2 /* UI */,
 				D9B6BB6B1E5E3A19009238E2 /* Backend */,
+				D9BE3F761E6117AC0011D471 /* Utils */,
 				D9B6BB641E5E3862009238E2 /* Info.plist */,
 			);
 			path = "neural-network-navigation";
@@ -118,6 +121,14 @@
 				6C5D37F01E60BCA10011713A /* CityBuilder.swift */,
 			);
 			name = City;
+			sourceTree = "<group>";
+		};
+		D9BE3F761E6117AC0011D471 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D9BE3F771E6117BC0011D471 /* Utils.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +214,7 @@
 				6C5D37E91E60BAEF0011713A /* FFNN.swift in Sources */,
 				D9B6BB5C1E5E3862009238E2 /* AppDelegate.swift in Sources */,
 				D9BE3F751E60AE250011D471 /* CityGenerator.swift in Sources */,
+				D9BE3F781E6117BC0011D471 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
