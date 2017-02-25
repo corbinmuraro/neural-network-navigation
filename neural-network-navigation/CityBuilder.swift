@@ -10,10 +10,21 @@ import Foundation
 
 class CityBuilder {
 
-    struct 
-    var intersections = [Double](count: 3, repeatedValue: 0.0)
+    let city = City()
     
-    let network = FFNN(inputs: )
-
-
+    city.generate(area: (x: 10, y: 10), nodeCount: 20)
+    
+    
+    var numNodes = city.nodes.count
+    
+    let network = FFNN(inputs: numNodes, hidden: 20, outputs: numNodes, learningRate: 1.0, momentum: 0.5, weights: nil, activationFunction: .Sigmoid, errorFunction: .crossEntropy(average: true))
+    
+    
+    func getTrainingData() {
+        
+    }
+    
+    func trainNetwork() {
+        
+    }
 }
