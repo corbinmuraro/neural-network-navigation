@@ -16,7 +16,13 @@ class City {
     fileprivate(set) var nodes = Set<Intersection>()
     fileprivate(set) var area: Vector2 = (0,0)
     
+    // Mark: Init and Static Vars
     
+    static var defaultConfig: City {
+        let city = City()
+        city.generate(cityArea: (10,10), nodeCount: 20)
+        return city
+    }
     
     // Mark: Methods
     func generate(cityArea area: Vector2, nodeCount: Int) {
@@ -86,21 +92,22 @@ class City {
         // Mark: Privte Properties for Computations
         fileprivate var ids = Set<Int>()
         
-        convenience init(connectionRange: Range, lanesRange: Range) {
-            self.connectionRange = connectionRange
-            self.lanesRange = lanesRange
-        }
+//        convenience init(connectionRange: Range, lanesRange: Range) {
+//            self.connectionRange = connectionRange
+//            self.lanesRange = lanesRange
+//        }
         
         func generateIntersection(withinArea area: Vector2, nodes: inout Set<Intersection>) -> Intersection {
             let id = generateIntersectionID()
             let xCoor = Utils.random(min: 0, max: area.x)
             let yCoor = Utils.random(min: 0, max: area.y)
             let node = Intersection(id: id, coor: (xCoor, yCoor))
-            node.roads = generateConnections(for: node, nodes: nodes)
+            node.roads = generateConnections(for: node, nodes: &nodes)
+            return node
         }
         
         private func generateConnections(for start: Intersection, nodes: inout Set<Intersection>) -> [Road] {
-            let endpoints = intersectionsclosest(to: start, among: nodes)
+            let endpoints = intersectionsclosest(to: start, among: &nodes)
             
             var connections = [Road]()
             let connectionCount = Utils.random(min: connectionRange.min, max: connectionRange.max)

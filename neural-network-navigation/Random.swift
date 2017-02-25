@@ -17,7 +17,7 @@ class Random {
     }
     
     static func numberFromZeroToOne() -> (Double) {
-        return Double(random(maximumInteger))/Double(maximumInteger)
+        return Double(random(number: maximumInteger))/Double(maximumInteger)
     }
     
     static func randomBounded(min: Double, max: Double) -> Double {
