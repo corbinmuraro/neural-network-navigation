@@ -16,14 +16,6 @@ class City {
     fileprivate(set) var nodes = Set<Intersection>()
     fileprivate(set) var area: Vector2 = (0,0)
     
-    // Mark: Init and Static Vars
-    
-    static var defaultConfig: City {
-        let city = City()
-        city.generate(cityArea: (10,10), nodeCount: 20)
-        return city
-    }
-    
     // Mark: Methods
     func generate(cityArea area: Vector2, nodeCount: Int) {
         self.area = area
@@ -33,10 +25,6 @@ class City {
         }
         
     }
-    
-    // Mark: Convenience Methods
-    
-    
     
     // Mark: Classses and Structs
     

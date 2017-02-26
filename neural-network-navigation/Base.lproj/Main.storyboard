@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ipi-tF-1eq">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -653,41 +655,78 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="neural_network_navigation" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="R2V-B0-nI4">
+        <!--Tab View Controller-->
+        <scene sceneID="Cmf-Ga-RPN">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                    </window>
+                <tabViewController selectedTabViewItemIndex="0" id="ipi-tF-1eq" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem label="Setup" identifier="" id="mye-mB-0Wv"/>
+                        <tabViewItem label="View" identifier="" id="vy6-R2-hBJ"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="kaI-du-I0B">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <tabViewItems/>
+                    </tabView>
                     <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                        <segue destination="jki-XW-rfo" kind="relationship" relationship="tabItems" id="2F9-A6-Cyq"/>
+                        <segue destination="ACW-9y-KiE" kind="relationship" relationship="tabItems" id="X32-JI-Rqg"/>
                     </connections>
-                </windowController>
-                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                </tabViewController>
+                <customObject id="LE3-9m-3Ob" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="-78" y="446"/>
+        </scene>
+        <!--Setup View Controller-->
+        <scene sceneID="eND-a1-21T">
+            <objects>
+                <viewController id="jki-XW-rfo" customClass="SetupViewController" customModule="neural_network_navigation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="WXn-3Y-nlN">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7EP-ls-0uP">
+                                <rect key="frame" x="14" y="252" width="124" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="3a7-no-ojS"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Generate City" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o4H-Ed-kd7">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="generateCity:" target="jki-XW-rfo" id="9JE-G6-Exl"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="7EP-ls-0uP" firstAttribute="top" secondItem="WXn-3Y-nlN" secondAttribute="top" constant="20" id="LcI-yn-rLR"/>
+                            <constraint firstItem="7EP-ls-0uP" firstAttribute="leading" secondItem="WXn-3Y-nlN" secondAttribute="leading" constant="20" id="itS-hv-sU3"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="GuX-ja-gy0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592" y="265"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
+        <scene sceneID="Pbg-Lh-IlH">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <viewController id="ACW-9y-KiE" sceneMemberID="viewController">
+                    <view key="view" id="u6i-qj-BqW">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="S6H-ZT-o1q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="592" y="626"/>
         </scene>
     </scenes>
 </document>

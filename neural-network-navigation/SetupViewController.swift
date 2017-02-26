@@ -8,8 +8,12 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class SetupViewController: NSViewController {
 
+    @IBAction func generateCity(_ sender: NSButton) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
