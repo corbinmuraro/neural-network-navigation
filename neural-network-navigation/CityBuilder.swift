@@ -13,13 +13,20 @@ class CityBuilder {
     var city: City
     
     init() {
-        city = City()
-        city.generate(cityArea: (10,10), nodeCount: 20)
-        var numNodes = city.nodes.count
-        
-        let network = FFNN(inputs: numNodes, hidden: 20, outputs: numNodes, learningRate: 1.0, momentum: 0.5, weights: nil, activationFunction: .Sigmoid, errorFunction: .crossEntropy(average: true))
+        self.city = City()
     }
     
+    func build(cityOfSize cityArea: Vector2, nodeCount: Int, completion: () -> Void) {
+        city = City()
+        city.generate(cityArea: cityArea, nodeCount: nodeCount)
+        var numNodes = city.nodes.count
+        
+        //let network = FFNN(inputs: numNodes, hidden: 20, outputs: numNodes, learningRate: 1.0, momentum: 0.5, weights: nil, activationFunction: .Sigmoid, errorFunction: .crossEntropy(average: true))
+        
+        
+        // Calls the completion() callback for the caller
+        completion()
+    }
 
     
     
