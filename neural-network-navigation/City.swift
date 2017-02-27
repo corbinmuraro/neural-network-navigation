@@ -8,23 +8,40 @@
 
 import Foundation
 
+protocol CityGeneratorDelegate {
+    var intervalSize: Int { get }
+    func generateIntersectionPartialComplete(completedNodes: Int, totalNodes: Int)
+    func generateConnectionsPartialComplete(completedNodes: Int, totalNodes: Int)
+}
+
 class City {
     
+    typealias nodeType = [Intersection]
+    
     // Mark: Properties
-    fileprivate(set) var nodes = Set<Intersection>()
+    fileprivate(set) var nodes = nodeType()
     fileprivate(set) var area: Vector2 = (0,0)
     
     // Mark: Methods
-    func generate(cityArea area: Vector2, nodeCount: Int) {
+    func generate(cityArea area: Vector2, nodeCount: Int, delegate: CityGeneratorDelegate?) {
         self.area = area
-        let generator = Generator()
+        let generator = Generator(nodeCount: nodeCount)
+        nodes = nodeType(repeating: Intersection.zero , count: nodeCount)
         // First generate the nodes
-        for _ in 0..<nodeCount {
-            nodes.insert(generator.generateIntersection(withinArea: area))
+        for i in 0..<nodeCount {
+            nodes[i] = generator.generateIntersection(withinArea: area)
+            if let delegate = delegate, i % delegate.intervalSize == 0 {
+                delegate.generateIntersectionPartialComplete(completedNodes: i, totalNodes: nodeCount)
+            }
         }
         // Then we look at all the nodes and generate random connection
+        var counter = 0
         for node in nodes {
             generator.generateConnections(for: node, nodes: &nodes)
+            if let delegate = delegate, counter % delegate.intervalSize == 0 {
+                delegate.generateIntersectionPartialComplete(completedNodes: counter, totalNodes: nodeCount)
+            }
+            counter += 1
         }
         
     }
@@ -32,6 +49,8 @@ class City {
     // Mark: Classses and Structs
     
     class Intersection: Hashable {
+        static var zero = Intersection(id: 0, coor: (0,0))
+        
         // Hashable
         var hashValue: Int { return id }
         static func == (lhs: Intersection, rhs: Intersection) -> Bool {
@@ -77,9 +96,14 @@ class City {
         
         var connectionRange: Range = (1,3)
         var lanesRange: Range = (1,3)
+        var nodeCount: Int
         
         // Mark: Privte Properties for Computations
         fileprivate var ids = Set<Int>()
+        
+        init(nodeCount: Int) {
+            self.nodeCount = nodeCount
+        }
         
 //        convenience init(connectionRange: Range, lanesRange: Range) {
 //            self.connectionRange = connectionRange
@@ -94,7 +118,7 @@ class City {
             return node
         }
         
-        func generatedConnections(for start: Intersection, nodes: inout Set<Intersection>) -> [Road] {
+        func generatedConnections(for start: Intersection, nodes: inout nodeType) -> [Road] {
             let endpoints = intersectionsclosest(to: start, among: &nodes)
             
             var connections = [Road]()
@@ -106,7 +130,7 @@ class City {
             return connections
         }
         
-        func generateConnections(for start: Intersection, nodes: inout Set<Intersection>) {
+        func generateConnections(for start: Intersection, nodes: inout nodeType) {
             start.roads = generatedConnections(for: start, nodes: &nodes)
         }
         
@@ -114,7 +138,7 @@ class City {
             return Road(start: start, end: end, lanes: lanes)
         }
         
-        private func intersectionsclosest(to node: Intersection, among nodes: inout Set<Intersection>) -> [Intersection] {
+        private func intersectionsclosest(to node: Intersection, among nodes: inout nodeType) -> [Intersection] {
             return Array(nodes).sorted(by: {$0.distance(to: node) < $1.distance(to: node)})
         }
         

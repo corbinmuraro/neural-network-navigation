@@ -752,11 +752,8 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGx-kO-x87">
-                                <rect key="frame" x="150" y="200" width="83" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="79" id="pvc-CF-bO5"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Loading" id="KRM-7i-fBt">
+                                <rect key="frame" x="150" y="200" width="282" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Loading" usesSingleLineMode="YES" id="KRM-7i-fBt">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -768,7 +765,7 @@
                                     <rect key="frame" x="1" y="1" width="415" height="156"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="BaK-Ih-zl6">
+                                        <textView editable="NO" importsGraphics="NO" richText="NO" usesFontPanel="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" textCompletion="NO" id="BaK-Ih-zl6">
                                             <rect key="frame" x="0.0" y="0.0" width="415" height="156"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -784,12 +781,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="GUg-Tp-lvB">
-                                    <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
+                                    <rect key="frame" x="400" y="1" width="16" height="156"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7EP-ls-0uP">
                                 <rect key="frame" x="14" y="191" width="124" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="KXU-d8-rv5"/>
+                                </constraints>
                                 <buttonCell key="cell" type="push" title="Generate City" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o4H-Ed-kd7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -813,6 +813,7 @@
                             <constraint firstItem="2nW-cE-HEr" firstAttribute="leading" secondItem="WXn-3Y-nlN" secondAttribute="leading" constant="20" symbolic="YES" id="P4y-wK-NaW"/>
                             <constraint firstItem="WuH-BR-LKX" firstAttribute="leading" secondItem="7EP-ls-0uP" secondAttribute="leading" id="eNF-1K-UWn"/>
                             <constraint firstItem="2nW-cE-HEr" firstAttribute="centerY" secondItem="Tml-Hs-zAT" secondAttribute="centerY" id="fDV-dZ-Orv"/>
+                            <constraint firstAttribute="trailing" secondItem="oGx-kO-x87" secondAttribute="trailing" constant="20" id="m5p-NX-lmG"/>
                             <constraint firstItem="F4R-Bj-oiy" firstAttribute="baseline" secondItem="6Z1-UG-v3B" secondAttribute="baseline" id="oTF-OJ-GnU"/>
                             <constraint firstItem="oGx-kO-x87" firstAttribute="leading" secondItem="7EP-ls-0uP" secondAttribute="trailing" constant="20" id="pJu-80-eI8"/>
                             <constraint firstItem="uVj-dh-5HH" firstAttribute="top" secondItem="7EP-ls-0uP" secondAttribute="bottom" constant="20" symbolic="YES" id="tIx-AW-9Gi"/>
@@ -824,6 +825,7 @@
                     </view>
                     <connections>
                         <outlet property="debugTextView" destination="BaK-Ih-zl6" id="huq-Nz-7Lw"/>
+                        <outlet property="generateButton" destination="7EP-ls-0uP" id="RLJ-8Z-P8F"/>
                         <outlet property="loadingLabel" destination="oGx-kO-x87" id="rpe-3H-AgA"/>
                         <outlet property="nodeCountTextField" destination="Qyt-gP-nGq" id="S8r-Gl-fLO"/>
                         <outlet property="xSizeTextField" destination="Tml-Hs-zAT" id="ta7-FW-tQI"/>

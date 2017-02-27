@@ -16,9 +16,9 @@ class CityBuilder {
         self.city = City()
     }
     
-    func build(cityOfSize cityArea: Vector2, nodeCount: Int, completion: () -> Void) {
+    func build(cityOfSize cityArea: Vector2, nodeCount: Int, delegate: CityGeneratorDelegate?, completion: () -> Void) {
         city = City()
-        city.generate(cityArea: cityArea, nodeCount: nodeCount)
+        city.generate(cityArea: cityArea, nodeCount: nodeCount, delegate: delegate)
         var numNodes = city.nodes.count
         
         //let network = FFNN(inputs: numNodes, hidden: 20, outputs: numNodes, learningRate: 1.0, momentum: 0.5, weights: nil, activationFunction: .Sigmoid, errorFunction: .crossEntropy(average: true))

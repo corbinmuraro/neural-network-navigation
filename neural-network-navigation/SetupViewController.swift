@@ -16,10 +16,12 @@ class SetupViewController: NSViewController {
     @IBOutlet weak var nodeCountTextField: NSTextField!
     @IBOutlet weak var loadingLabel: NSTextField!
     @IBOutlet weak var debugTextView: NSTextView!
+    @IBOutlet weak var generateButton: NSButton!
 
     @IBAction func generateCity(_ sender: NSButton) {
         loadingLabel.stringValue = "Loading"
         loadingLabel.isHidden = false
+        generateButton.isEnabled = false
         
         let formatter = NumberFormatter()
         let xSize = formatter.number(fromUngrouped: xSizeTextField.stringValue)?.intValue ?? 10
@@ -27,6 +29,7 @@ class SetupViewController: NSViewController {
         let nodeCount = formatter.number(fromUngrouped: nodeCountTextField.stringValue)?.intValue ?? 20
         generateCity(ofSize: (xSize, ySize), nodeCount: nodeCount, completion: {
             self.loadingLabel.stringValue = "Done"
+            self.generateButton.isEnabled = true
             self.printToDebugView()
         })
         
@@ -49,13 +52,14 @@ class SetupViewController: NSViewController {
     // Mark: Variables
     
     var cityBuilder: CityBuilder?
+    var cityGeneratorDelegate: CityGeneratorDelegate?
     
     // Mark: Internal Functions
     
     private func generateCity(ofSize size: Vector2, nodeCount: Int, completion: @escaping () -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             self.cityBuilder = CityBuilder()
-            self.cityBuilder?.build(cityOfSize: size, nodeCount: nodeCount, completion: {
+            self.cityBuilder?.build(cityOfSize: size, nodeCount: nodeCount, delegate: self, completion: {
                 
             })
             // When generation is done
@@ -89,6 +93,22 @@ class SetupViewController: NSViewController {
         
     }
     
+    // CityGeneratorDelegate
+    var intervalSize = 1
+}
 
+extension SetupViewController: CityGeneratorDelegate {
+    
+    func generateIntersectionPartialComplete(completedNodes: Int, totalNodes: Int) {
+        DispatchQueue.main.async {
+            self.loadingLabel.stringValue = "Generating intersections: \(completedNodes) out of \(totalNodes) nodes completed."
+        }
+    }
+    func generateConnectionsPartialComplete(completedNodes: Int, totalNodes: Int) {
+        DispatchQueue.main.async {
+            self.loadingLabel.stringValue = "Generating connections: \(completedNodes) out of \(totalNodes) nodes completed."
+        }
+    }
+    
 }
 
