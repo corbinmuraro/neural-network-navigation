@@ -16,7 +16,7 @@ protocol CityGeneratorDelegate {
 
 class City {
     
-    typealias nodeType = [Intersection]
+    typealias nodeType = NSMutableSet
     
     // Mark: Properties
     fileprivate(set) var nodes = nodeType()
@@ -26,10 +26,10 @@ class City {
     func generate(cityArea area: Vector2, nodeCount: Int, delegate: CityGeneratorDelegate?) {
         self.area = area
         let generator = Generator(nodeCount: nodeCount)
-        nodes = nodeType(repeating: Intersection.zero , count: nodeCount)
+        nodes = nodeType(capacity: nodeCount)
         // First generate the nodes
         for i in 0..<nodeCount {
-            nodes[i] = generator.generateIntersection(withinArea: area)
+            nodes.add(generator.generateIntersection(withinArea: area))
             if let delegate = delegate, i % delegate.intervalSize == 0 {
                 delegate.generateIntersectionPartialComplete(completedNodes: i, totalNodes: nodeCount)
             }
