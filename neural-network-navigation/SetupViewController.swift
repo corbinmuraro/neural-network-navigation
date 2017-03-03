@@ -51,7 +51,7 @@ class SetupViewController: NSViewController {
     
     // Mark: Variables
     
-    var cityBuilder: CityBuilder?
+    var cityBuilder = DataSourse.shared.cityBuilder
     var cityGeneratorDelegate: CityGeneratorDelegate?
     
     // Mark: Internal Functions

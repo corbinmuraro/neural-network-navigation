@@ -16,7 +16,7 @@ protocol CityGeneratorDelegate {
 
 class City {
     
-    typealias nodeType = NSMutableSet
+    typealias nodeType = NSMutableArray
     
     // Mark: Properties
     fileprivate(set) var nodes = nodeType()
@@ -25,24 +25,10 @@ class City {
     // Mark: Methods
     func generate(cityArea area: Vector2, nodeCount: Int, delegate: CityGeneratorDelegate?) {
         self.area = area
-        let generator = Generator(nodeCount: nodeCount)
-        nodes = nodeType(capacity: nodeCount)
-        // First generate the nodes
-        for i in 0..<nodeCount {
-            nodes.add(generator.generateIntersection(withinArea: area))
-            if let delegate = delegate, i % delegate.intervalSize == 0 {
-                delegate.generateIntersectionPartialComplete(completedNodes: i, totalNodes: nodeCount)
-            }
-        }
-        // Then we look at all the nodes and generate random connection
-        var counter = 0
-        for node in nodes {
-            generator.generateConnections(for: node, nodes: &nodes)
-            if let delegate = delegate, counter % delegate.intervalSize == 0 {
-                delegate.generateIntersectionPartialComplete(completedNodes: counter, totalNodes: nodeCount)
-            }
-            counter += 1
-        }
+        let generator = Generator()
+        generator.delegate = delegate
+        nodes = generator.generateIntersections(count: nodeCount, withinArea: area)
+        generator.generateRoads(forIntersections: &nodes, connectionCount: (1,3))
         
     }
     
@@ -94,62 +80,59 @@ class City {
     
     class Generator {
         
-        var connectionRange: Range = (1,3)
-        var lanesRange: Range = (1,3)
-        var nodeCount: Int
+        var delegate: CityGeneratorDelegate?
         
-        // Mark: Privte Properties for Computations
-        fileprivate var ids = Set<Int>()
-        
-        init(nodeCount: Int) {
-            self.nodeCount = nodeCount
+        func generateIntersections(count: Int, withinArea area: Vector2) -> NSMutableArray {
+            let array = NSMutableArray(capacity: count)
+            for i in 0..<count {
+                let id = i
+                let xCoor = Utils.random(min: 0, max: area.x)
+                let yCoor = Utils.random(min: 0, max: area.y)
+                array.add(Intersection(id: id, coor: (xCoor, yCoor)))
+                if let delegate = delegate, i % delegate.intervalSize == 0 {
+                    delegate.generateIntersectionPartialComplete(completedNodes: i, totalNodes: count)
+                }
+            }
+            return array
         }
         
-//        convenience init(connectionRange: Range, lanesRange: Range) {
-//            self.connectionRange = connectionRange
-//            self.lanesRange = lanesRange
-//        }
-        
-        func generateIntersection(withinArea area: Vector2) -> Intersection {
-            let id = generateIntersectionID()
-            let xCoor = Utils.random(min: 0, max: area.x)
-            let yCoor = Utils.random(min: 0, max: area.y)
-            let node = Intersection(id: id, coor: (xCoor, yCoor))
-            return node
-        }
-        
-        func generatedConnections(for start: Intersection, nodes: inout nodeType) -> [Road] {
-            let endpoints = intersectionsclosest(to: start, among: &nodes)
+        func generateRoads(forIntersections array: inout NSMutableArray, connectionCount: Range) {
+            var numConnection = Array<Int>(repeating: 0, count: array.count)
+            var completed = Dictionary<Int, Int>(minimumCapacity: array.count)
             
-            var connections = [Road]()
-            let connectionCount = Utils.random(min: connectionRange.min, max: connectionRange.max)
-            for i in 0..<(min(connectionCount, endpoints.count)) {
-                let road = generateRoad(start: start, end: endpoints[i])
-                connections.append(road)
+            for i in 0..<numConnection.count {
+                numConnection[i] = Utils.random(min: 1, max: 3)
             }
-            return connections
-        }
-        
-        func generateConnections(for start: Intersection, nodes: inout nodeType) {
-            start.roads = generatedConnections(for: start, nodes: &nodes)
-        }
-        
-        private func generateRoad(start: Intersection, end: Intersection, lanes: Int = Utils.random(min: 1, max: 3)) -> Road {
-            return Road(start: start, end: end, lanes: lanes)
-        }
-        
-        private func intersectionsclosest(to node: Intersection, among nodes: inout nodeType) -> [Intersection] {
-            return Array(nodes).sorted(by: {$0.distance(to: node) < $1.distance(to: node)})
-        }
-        
-        private func generateIntersectionID() -> Int {
-            let id = Utils.random()
-            if !ids.contains(id) {
-                ids.insert(id)
-                return id
-            } else {
-                return generateIntersectionID()
+            
+            for i in 0..<array.count {
+                
+                guard let roadCount = completed[i] else { completed.updateValue(0, forKey: i); break }
+                if roadCount < numConnection[i] {
+                    completed.updateValue(roadCount + 1, forKey: i)
+                } else {
+                    continue
+                }
+                
+                let nearest = intersectionsclosest(to: array[i] as! Intersection, among: array)
+                for j in 0..<roadCount {
+                    let otherIndex = array.index(of: nearest[j])
+                    guard let otherRoadCount = completed[otherIndex] else { completed.updateValue(0, forKey: otherIndex); break }
+                    if otherRoadCount < numConnection[otherIndex] {
+                        completed.updateValue(otherRoadCount + 1, forKey: i)
+                    } else {
+                        continue
+                    }
+                    (array[i] as! Intersection).roads.append(Road(start: array[i] as! Intersection, end: nearest[j] , lanes: Utils.random(min: 1, max: 3)))
+                }
+                
+                if let delegate = delegate, i % delegate.intervalSize == 0 {
+                    delegate.generateIntersectionPartialComplete(completedNodes: i, totalNodes: array.count)
+                }
             }
+        }
+        
+        private func intersectionsclosest(to node: Intersection, among nodes: NSMutableArray) -> [Intersection] {
+            return nodes.sorted(by: { ($0 as! Intersection).distance(to: node) < ($1 as! Intersection).distance(to: node)} ) as! [City.Intersection]
         }
         
     }
