@@ -12,15 +12,15 @@ import Foundation
 // OUTPUTS: dictionary with line segments building up the shortest path
 func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) -> [City.Intersection:City.Intersection] {
     
-    var intersections = city.nodes
+    let intersections = city.nodes
     var distances:[City.Intersection:Double] = [:] // empty dictionary with pairs of Intersection, Double
     var previousPaths:[City.Intersection:City.Intersection] = [:] // empty dictionary with pairs of Intersection, Double
     
-    var currentIntersection: City.Intersection = intersections[0]
-    
+    let currentIntersection: City.Intersection = intersections[0] as! City.Intersection
     
     // set starting values for the algorithm
-    for intersection:City.Intersection in intersections {
+    for intersection in intersections {
+        guard let intersection = intersection as? City.Intersection else { continue }
         distances[intersection] = Double.infinity
         previousPaths[intersection] = nil
     }
@@ -31,7 +31,8 @@ func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) ->
     while (intersections.count > 0) {
         var closestNode:City.Intersection? = nil
         var distance:Double = Double.infinity
-        for intersection:City.Intersection in intersections {
+        for intersection in intersections {
+            guard let intersection = intersection as? City.Intersection else { continue }
             if (closestNode == nil || distance < distances[intersection]!) {
                 distance = distances[intersection]!
                 closestNode = intersection
@@ -42,29 +43,32 @@ func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) ->
             return previousPaths
         }
         
-        var nodeIndex:Int? = find(intersections, closestNode!)?
+//        var nodeIndex:Int? = find(intersections, closestNode!)?
+        let nodeIndex:Int? = intersections.index(of: closestNode!)
         intersections.remove(at: nodeIndex!)
+
         
-        if (closestNode?.roads != nil && closestNode?.roads?.count > 0) {
+        
+        if (closestNode?.roads != nil && (closestNode?.roads.count)! > 0) {
             
             // closestNode?.roads?.each({(road:Road) -> Void? in
-            for road:City.Road in closestNode?.roads {
+            for road:City.Road in (closestNode?.roads)! {
                 
-                if (road.startIntersection = closestNode) {
-                    // use the road's 'end' vertex to determine distance
-                    var distance = distances[closestNode!]! + closestNode!.distanceToVertex(road.end)!.distance
-                    if distance < distances[road.destinationVertex] {
-                        distances[road.destinationVertex] = distance
-                        previousPaths[road.end] = closestNode!
+                if (road.a == closestNode) {
+                    // use the road's 'b' vertex to determine distance
+                    let distance = distances[closestNode!]! + closestNode!.distance(to: road.b)
+                    if distance < distances[road.b]! {
+                        distances[road.b]! = distance
+                        previousPaths[road.b] = closestNode!
                     }
                 }
                     
                 else {
-                    // use the road's 'start' vertex to determine distance
-                    var distance = distances[closestNode!]! + closestNode!.distanceToVertex(road.start)!.distance
-                    if distance < distances[road.destinationVertex] {
-                        distances[road.destinationVertex] = distance
-                        previousPaths[road.start] = closestNode!
+                    // use the road's 'a' vertex to determine distance
+                    let distance = distances[closestNode!]! + closestNode!.distance(to: road.a)
+                    if distance < distances[road.a]! {
+                        distances[road.a]! = distance
+                        previousPaths[road.a] = closestNode!
                     }
                 }
                 
@@ -75,3 +79,5 @@ func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) ->
     
     return previousPaths
 }
+
+
