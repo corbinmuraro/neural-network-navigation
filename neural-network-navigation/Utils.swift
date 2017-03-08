@@ -36,12 +36,16 @@ extension NumberFormatter {
     }
 }
 
-struct Vector2 {
+struct Vector2: CustomStringConvertible {
     var x: Int
     var y: Int
     
     init(x: Int, y: Int) {
         self.x = x; self.y = y
+    }
+    
+    var description: String {
+        return "(\(x),\(y))"
     }
     
     static let zero = Vector2(x: 0, y: 0)
@@ -55,6 +59,13 @@ struct Vector2 {
     }
     static func -(lhs: Vector2, rhs: Vector2) -> Vector2 {
         return Vector2(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+    }
+    
+    static func +=(lhs: inout Vector2, rhs: Vector2) {
+        lhs = lhs + rhs
+    }
+    static func -=(lhs: inout Vector2, rhs: Vector2) {
+        lhs = lhs - rhs
     }
     
     static func ==(lhs: Vector2, rhs: Vector2) -> Bool {

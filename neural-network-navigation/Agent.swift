@@ -37,18 +37,22 @@ class Agent {
     /**
      Travels down the path each step
      */
-    func runTrip() {
+    func runTrip(printer: (String) -> Void) {
         currentPos = startPos
+        printer("currentPos: \(currentPos) (endPos: \(endPos))")
         while currentPos != endPos {
             let input = sense()
             guard let output = try? network.update(inputs: input) else { return }
             guard let dir = output.max() else { return }
-            switch round(dir) {
-            case 0: currentPos + Vector2.up
-                case 0: currentPos + Vector2.up
-                case 0: currentPos + Vector2.up
+            switch output.index(of: dir)! {
+            case 0: currentPos += Vector2.up; printer("Going up")
+            case 1: currentPos += Vector2.down; printer("Going down")
+            case 2: currentPos += Vector2.left; printer("Going left")
+            case 3: currentPos += Vector2.right; printer("Going right")
+            default: break
             }
         }
+        printer("At end. currentPos: \(currentPos) (endPos: \(endPos))")
     }
     
     /**

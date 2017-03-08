@@ -42,6 +42,13 @@ class CityBuilder {
         network = FFNN(inputs: 6, hidden: 4, outputs: 4)
     }
     
+    func newTrip(printer: (String) -> Void) {
+        setupNetwork()
+        let agent = Agent(cityBuilder: self)
+        agent.newTrip()
+        agent.runTrip(printer: printer)
+    }
+    
     func train() {
         
     }
