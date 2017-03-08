@@ -19,6 +19,7 @@ class City {
     var nodes = NSMutableArray()
     let xLim: Int
     let yLim: Int
+    var size: Vector2 { return Vector2(x: xLim, y: yLim) }
         
     init(size: Vector2) {
         xLim = size.x; yLim = size.y

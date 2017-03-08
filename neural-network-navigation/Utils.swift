@@ -56,4 +56,29 @@ struct Vector2 {
     static func -(lhs: Vector2, rhs: Vector2) -> Vector2 {
         return Vector2(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
     }
+    
+    static func ==(lhs: Vector2, rhs: Vector2) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y
+    }
+    
+    static func !=(lhs: Vector2, rhs: Vector2) -> Bool {
+        return !(lhs == rhs)
+    }
+    
+    static func random(max: Vector2) -> Vector2 {
+        let x = Utils.random(min: 0, max: max.x)
+        let y = Utils.random(min: 0, max: max.y)
+        return Vector2(x: x, y: y)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

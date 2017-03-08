@@ -37,6 +37,17 @@ class CityBuilder {
         completion()
     }
     
+    
+    func setupNetwork() {
+        network = FFNN(inputs: 6, hidden: 4, outputs: 4)
+    }
+    
+    func train() {
+        
+    }
+    
+
+    
     func trainNetwork() {
         print("\nTraining Neural Network. . .")
 
