@@ -13,24 +13,25 @@ class CityBuilder {
     typealias Intersection = City.Intersection
     fileprivate(set) var city: City
     fileprivate(set) var numNodes: Int
-    fileprivate(set) var network: FFNN
+    //fileprivate(set) var network: FFNN
 
     lazy var trainPaths = [Intersection]()
     lazy var testPaths = [Intersection]()
     
     init() {
-        self.city = City()
+        self.city = City(size: Vector2.zero)
         numNodes = city.nodes.count
-        network = FFNN(inputs: numNodes, hidden: 20, outputs: numNodes, learningRate: 1.0, momentum: 0.5, weights: nil, activationFunction: .Sigmoid, errorFunction: .crossEntropy(average: true))
+        //network = FFNN(inputs: numNodes, hidden: 20, outputs: numNodes, learningRate: 1.0, momentum: 0.5, weights: nil, activationFunction: .Sigmoid, errorFunction: .crossEntropy(average: true))
         
-        build(cityArea: (x:50, y:50), nodeCount: 10, delegate: nil, completion: trainNetwork)
+        
+        //build(cityArea: Vector2(x: 50, y: 50), delegate: nil, completion: trainNetwork)
 
-        var result = dijkstra(city: city, start: city.nodes[0] as! City.Intersection, finish: city.nodes[city.nodes.length-1] as! City.Intersection)
+        //var result = dijkstra(city: city, start: city.nodes[0] as! City.Intersection, finish: city.nodes[city.nodes.count-1] as! City.Intersection)
     }
     
-    func build(cityArea: Vector2, nodeCount: Int, delegate: CityGeneratorDelegate?, completion: () -> Void) {
-        city = City()
-        city.generate(cityArea: cityArea, nodeCount: nodeCount, delegate: delegate)
+    func build(cityArea: Vector2, delegate: CityGeneratorDelegate?, completion: () -> Void) {
+        self.city = City(size: cityArea)
+        city.generate(openRoadBias: 0.75, delegate: delegate)
 
         // Calls the completion() callback for the caller
         completion()

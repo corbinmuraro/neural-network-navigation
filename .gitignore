@@ -1,6 +1,9 @@
 
 *.xcuserstate
 
+<<<<<<< HEAD
 neural-network-navigation.xcodeproj/project.xcworkspace/xcuserdata/Austin.xcuserdatad/UserInterfaceState.xcuserstate
 
+=======
+>>>>>>> newcity
 *.xcuserstate

@@ -18,7 +18,6 @@
 		6C5D37F11E60BCA10011713A /* CityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37F01E60BCA10011713A /* CityBuilder.swift */; };
 		D9A309FC1E6755450028BC31 /* CityInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A309FB1E6755450028BC31 /* CityInspectorViewController.swift */; };
 		D9A309FE1E6757D90028BC31 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A309FD1E6757D90028BC31 /* Data.swift */; };
-		D9A5DE061E64BBC100D4566E /* temp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9A5DE051E64BBC100D4566E /* temp.storyboard */; };
 		D9A5DE081E64BC8500D4566E /* CustomWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5DE071E64BC8500D4566E /* CustomWindowController.swift */; };
 		D9B6BB5C1E5E3862009238E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B6BB5B1E5E3862009238E2 /* AppDelegate.swift */; };
 		D9B6BB5E1E5E3862009238E2 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B6BB5D1E5E3862009238E2 /* SetupViewController.swift */; };
@@ -40,7 +39,6 @@
 		6C5D37F01E60BCA10011713A /* CityBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityBuilder.swift; sourceTree = "<group>"; };
 		D9A309FB1E6755450028BC31 /* CityInspectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityInspectorViewController.swift; sourceTree = "<group>"; };
 		D9A309FD1E6757D90028BC31 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		D9A5DE051E64BBC100D4566E /* temp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = temp.storyboard; sourceTree = "<group>"; };
 		D9A5DE071E64BC8500D4566E /* CustomWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWindowController.swift; sourceTree = "<group>"; };
 		D9B6BB581E5E3862009238E2 /* neural-network-navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "neural-network-navigation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B6BB5B1E5E3862009238E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 			children = (
 				D9B6BB5D1E5E3862009238E2 /* SetupViewController.swift */,
 				D9B6BB611E5E3862009238E2 /* Main.storyboard */,
-				D9A5DE051E64BBC100D4566E /* temp.storyboard */,
 				D9A5DE071E64BC8500D4566E /* CustomWindowController.swift */,
 				D9A309FB1E6755450028BC31 /* CityInspectorViewController.swift */,
 			);
@@ -208,7 +205,6 @@
 			files = (
 				D9B6BB601E5E3862009238E2 /* Assets.xcassets in Resources */,
 				D9B6BB631E5E3862009238E2 /* Main.storyboard in Resources */,
-				D9A5DE061E64BBC100D4566E /* temp.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

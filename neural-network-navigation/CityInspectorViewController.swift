@@ -22,9 +22,23 @@ class CityInspectorViewController: NSViewController {
             output.append("For node: \(nodeID)\n")
             output.append("Node ID: \(node.id)\n")
             output.append("Node Coordinates: (\(node.coor.x),\(node.coor.y))\n")
-            output.append("Roads Count: \(node.roads.count)\n")
-            for road in node.roads {
-                output.append("\tConnecting between: \(road.a.id) (\(road.a.coor.x),\(road.a.coor.y)) and \(road.b.id) (\(road.b.coor.x),\(road.b.coor.y))\n")
+            output.append("Roads:\n")
+            // Roads
+            if node.connections.up == true {
+                guard let upNode = city.intersection(at: node.coor + Vector2.up) else { return }
+                output.append("\tRoads going up to: \(upNode.id) (\(upNode.coor.x),\(upNode.coor.y))\n")
+            }
+            if node.connections.down == true {
+                guard let downNode = city.intersection(at: node.coor + Vector2.down) else { return }
+                output.append("\tRoads going down to: \(downNode.id) (\(downNode.coor.x),\(downNode.coor.y))\n")
+            }
+            if node.connections.left == true {
+                guard let leftNode = city.intersection(at: node.coor + Vector2.left) else { return }
+                output.append("\tRoads going left to: \(leftNode.id) (\(leftNode.coor.x),\(leftNode.coor.y))\n")
+            }
+            if node.connections.right == true {
+                guard let rightNode = city.intersection(at: node.coor + Vector2.right) else { return }
+                output.append("\tRoads going right to: \(rightNode.id) (\(rightNode.coor.x),\(rightNode.coor.y))\n")
             }
         } else {
             output.append("Error: Node invalid.\n")

@@ -48,7 +48,7 @@ func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) ->
         intersections.remove(at: nodeIndex!)
 
         
-        
+      /*
         if (closestNode?.roads != nil && (closestNode?.roads.count)! > 0) {
             
             // closestNode?.roads?.each({(road:Road) -> Void? in
@@ -75,6 +75,7 @@ func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) ->
                 
             }
         }
+ */
     }
     
     return previousPaths

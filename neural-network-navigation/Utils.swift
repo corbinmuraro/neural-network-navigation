@@ -9,7 +9,6 @@
 import Foundation
 
 // Defining commonly used Type Alias for the program
-typealias Vector2 = (x: Int, y: Int)
 typealias Range = (min: Int, max: Int)
 
 /* Class Description: Utils
@@ -34,5 +33,27 @@ extension NumberFormatter {
         } else {
             return number(from: string)
         }
+    }
+}
+
+struct Vector2 {
+    var x: Int
+    var y: Int
+    
+    init(x: Int, y: Int) {
+        self.x = x; self.y = y
+    }
+    
+    static let zero = Vector2(x: 0, y: 0)
+    static let up = Vector2(x: 0, y: 1)
+    static let down = Vector2(x: 0, y: -1)
+    static let left = Vector2(x: -1, y: 0)
+    static let right = Vector2(x: 1, y: 0)
+    
+    static func +(lhs: Vector2, rhs: Vector2) -> Vector2 {
+        return Vector2(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    }
+    static func -(lhs: Vector2, rhs: Vector2) -> Vector2 {
+        return Vector2(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
     }
 }

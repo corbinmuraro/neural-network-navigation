@@ -26,8 +26,7 @@ class SetupViewController: NSViewController {
         let formatter = NumberFormatter()
         let xSize = formatter.number(fromUngrouped: xSizeTextField.stringValue)?.intValue ?? 10
         let ySize = formatter.number(fromUngrouped: ySizeTextField.stringValue)?.intValue ?? 10
-        let nodeCount = formatter.number(fromUngrouped: nodeCountTextField.stringValue)?.intValue ?? 20
-        generateCity(ofSize: (xSize, ySize), nodeCount: nodeCount, completion: {
+        generateCity(ofSize: Vector2(x: xSize, y: ySize), completion: {
             self.loadingLabel.stringValue = "Done"
             self.generateButton.isEnabled = true
             self.printToDebugView()
@@ -56,10 +55,10 @@ class SetupViewController: NSViewController {
     
     // Mark: Internal Functions
     
-    private func generateCity(ofSize size: Vector2, nodeCount: Int, completion: @escaping () -> Void) {
+    private func generateCity(ofSize size: Vector2, completion: @escaping () -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             DataSourse.shared.newCityBuilder()
-            self.cityBuilder?.build(cityOfSize: size, nodeCount: nodeCount, delegate: self, completion: {
+            self.cityBuilder?.build(cityArea: size, delegate: self, completion: {
                 
             })
             // When generation is done
@@ -76,7 +75,7 @@ class SetupViewController: NSViewController {
         if let city = cityBuilder?.city {
             var output = ""
             output.append("City generated\n")
-            output.append("City Size: \(city.area.x) × \(city.area.y)\n")
+            output.append("City Size: \(city.xLim) × \(city.yLim)\n")
             output.append("Node Count: \(city.nodes.count)\n")
             
             debugTextView.textStorage?.append(NSAttributedString(string: output))
@@ -93,11 +92,13 @@ class SetupViewController: NSViewController {
         
     }
     
-    // CityGeneratorDelegate
-    var intervalSize = 1
 }
 
 extension SetupViewController: CityGeneratorDelegate {
+    internal func intervalSize() -> Int {
+        return 10
+    }
+
     
     func generateIntersectionPartialComplete(completedNodes: Int, totalNodes: Int) {
         DispatchQueue.main.async {
