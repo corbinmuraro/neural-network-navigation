@@ -51,14 +51,14 @@ class SetupViewController: NSViewController {
     
     // Mark: Variables
     
-    var cityBuilder = DataSourse.shared.cityBuilder
+    var cityBuilder: CityBuilder? { return DataSourse.shared.cityBuilder }
     var cityGeneratorDelegate: CityGeneratorDelegate?
     
     // Mark: Internal Functions
     
     private func generateCity(ofSize size: Vector2, nodeCount: Int, completion: @escaping () -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            self.cityBuilder = CityBuilder()
+            DataSourse.shared.newCityBuilder()
             self.cityBuilder?.build(cityOfSize: size, nodeCount: nodeCount, delegate: self, completion: {
                 
             })

@@ -60,8 +60,8 @@ class City {
     }
     
     class Road {
-        let start: Intersection
-        let end: Intersection
+        let a: Intersection
+        let b: Intersection
         
         let lanes: Int
         
@@ -69,9 +69,9 @@ class City {
             return lanes
         }
         
-        init(start: Intersection, end: Intersection, lanes: Int) {
-            self.start = start
-            self.end = end
+        init(a: Intersection, b: Intersection, lanes: Int) {
+            self.a = a
+            self.b = b
             self.lanes = lanes
         }
     }
@@ -98,41 +98,62 @@ class City {
         
         func generateRoads(forIntersections array: inout NSMutableArray, connectionCount: Range) {
             var numConnection = Array<Int>(repeating: 0, count: array.count)
-            var completed = Dictionary<Int, Int>(minimumCapacity: array.count)
             
             for i in 0..<numConnection.count {
-                numConnection[i] = Utils.random(min: 1, max: 3)
+                numConnection[i] = Utils.random(min: 1, max: 3 + 1)
             }
             
-            for i in 0..<array.count {
+            for index in 0..<array.count {
+                let node = array[index] as! City.Intersection
                 
-                guard let roadCount = completed[i] else { completed.updateValue(0, forKey: i); break }
-                if roadCount < numConnection[i] {
-                    completed.updateValue(roadCount + 1, forKey: i)
-                } else {
+                let roadCount = node.roads.count
+                let roadCountTarget = numConnection[index]
+                
+                
+                if roadCount >= roadCountTarget {
                     continue
                 }
                 
-                let nearest = intersectionsclosest(to: array[i] as! Intersection, among: array)
-                for j in 0..<roadCount {
-                    let otherIndex = array.index(of: nearest[j])
-                    guard let otherRoadCount = completed[otherIndex] else { completed.updateValue(0, forKey: otherIndex); break }
-                    if otherRoadCount < numConnection[otherIndex] {
-                        completed.updateValue(otherRoadCount + 1, forKey: i)
-                    } else {
+                //let nearest = intersectionsClosest(to: node, among: array)
+                
+                let nearest = array
+                
+                for _ in 0..<roadCountTarget {
+                    var foundIndex = false
+                    var idx = 0
+                    while !foundIndex {
+                        idx = Utils.random(min: 0, max: array.count)
+                        if idx != index {
+                            foundIndex = true
+                        }
+                    }
+                    
+                    let otherNode = nearest[idx] as! City.Intersection
+                    
+                    let otherIndex = array.index(of: otherNode)
+                    let otherRoadCount = otherNode.roads.count
+                    let otherRoadCountTarget = numConnection[otherIndex]
+                    
+                    if otherRoadCount >= otherRoadCountTarget {
                         continue
                     }
-                    (array[i] as! Intersection).roads.append(Road(start: array[i] as! Intersection, end: nearest[j] , lanes: Utils.random(min: 1, max: 3)))
+                    
+                    let road = Road(a: node, b: otherNode, lanes: 1)
+                    node.roads.append(road)
+                    otherNode.roads.append(road)
+                    
                 }
                 
-                if let delegate = delegate, i % delegate.intervalSize == 0 {
-                    delegate.generateIntersectionPartialComplete(completedNodes: i, totalNodes: array.count)
+                if let delegate = delegate, index % delegate.intervalSize == 0 {
+                    delegate.generateIntersectionPartialComplete(completedNodes: index, totalNodes: array.count)
                 }
             }
         }
         
-        private func intersectionsclosest(to node: Intersection, among nodes: NSMutableArray) -> [Intersection] {
-            return nodes.sorted(by: { ($0 as! Intersection).distance(to: node) < ($1 as! Intersection).distance(to: node)} ) as! [City.Intersection]
+        private func intersectionsClosest(to node: Intersection, among nodes: NSMutableArray) -> [Intersection] {
+            var array = nodes.sorted(by: { ($0 as! Intersection).distance(to: node) < ($1 as! Intersection).distance(to: node)} ) as! [City.Intersection]
+            array.removeFirst()
+            return array
         }
         
     }

@@ -15,5 +15,8 @@ class DataSourse {
     private init() { }
     
     var cityBuilder: CityBuilder?
+    func newCityBuilder() {
+        cityBuilder = CityBuilder()
+    }
     
 }
