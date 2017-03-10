@@ -1,24 +1,20 @@
 //
-//  TripViewController.swift
+//  TrainViewController.swift
 //  neural-network-navigation
 //
-//  Created by Austin Chau on 3/8/17.
+//  Created by Austin Chau on 3/9/17.
 //  Copyright © 2017 Psych186B. All rights reserved.
 //
 
 import Cocoa
 
-class TripViewController: NSViewController {
+class TrainViewController: NSViewController {
 
-    @IBOutlet weak var xStartTextField: NSTextField!
-    @IBOutlet weak var yStartTextField: NSTextField!
-    @IBOutlet var outputTextView: NSTextView!
+    @IBOutlet weak var timesTextField: NSTextField!
     @IBAction func goButton(_ sender: NSButton) {
-        runSimulation()
+        run()
     }
-    @IBAction func clearButton(_ sender: NSButton) {
-        
-    }
+    @IBOutlet var outputTextView: NSTextView!
     
     var cityBuilder: CityBuilder? { return DataSourse.shared.cityBuilder }
     
@@ -27,12 +23,14 @@ class TripViewController: NSViewController {
         // Do view setup here.
     }
     
-    func runSimulation() {
+    func run() {
         guard let cityBuilder = cityBuilder else { return }
         printToOutput(arg: "--date")
-        cityBuilder.newTrip() { output in
+        let formatter = NumberFormatter()
+        let times = formatter.number(fromUngrouped: timesTextField.stringValue)?.intValue ?? 1000
+        cityBuilder.trainNetwork(count: times, printer: { output in
             self.printToOutput(output)
-        }
+        })
     }
     
     func printToOutput(arg: String) {

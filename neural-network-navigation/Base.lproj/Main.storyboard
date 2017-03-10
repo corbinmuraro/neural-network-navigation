@@ -2,8 +2,10 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Bw7-Nh-lXH">
     <dependencies>
         <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="7104"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="the Touch Bar" message="Use a version of macOS with Touch Bar support." minToolsVersion="8.1" minSystemVersion="10.12.1" requiredIntegratedClassName="NSTouchBar"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -438,7 +440,7 @@
                         <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="294" y="363" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
                         <toolbar key="toolbar" implicitIdentifier="29C72EE7-41DB-452C-9DE5-E156D5F1E3AC" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="toY-C1-adb">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="1AEED3E5-D8ED-41C2-BB3A-E547B84CBC92" label="Inspector" paletteLabel="Inspector" tag="-1" image="NSInfo" id="PDS-5I-h1K">
@@ -485,7 +487,7 @@
         <!--Tab View Controller-->
         <scene sceneID="Cmf-Ga-RPN">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" id="ipi-tF-1eq" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="2" id="ipi-tF-1eq" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="mye-mB-0Wv"/>
                         <tabViewItem identifier="" id="vy6-R2-hBJ"/>
@@ -623,6 +625,27 @@
                             <constraint firstItem="Tml-Hs-zAT" firstAttribute="leading" secondItem="2nW-cE-HEr" secondAttribute="trailing" constant="8" symbolic="YES" id="wIT-9E-Sfm"/>
                         </constraints>
                     </view>
+                    <touchBar key="touchBar" id="UsG-SR-gpa">
+                        <touchBarItems>
+                            <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFlexibleSpace" id="ZcC-kf-rfi"/>
+                            <touchBarItem id="BYB-9Y-rMk">
+                                <viewController key="viewController" id="Tvf-VW-MSc">
+                                    <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XNG-yD-Tp8">
+                                        <rect key="frame" x="0.0" y="0.0" width="108" height="30"/>
+                                        <buttonCell key="cell" type="push" title="Generate City" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="P7g-hB-TEF">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="performClick:" target="7EP-ls-0uP" id="von-bo-EIa"/>
+                                        </connections>
+                                    </button>
+                                </viewController>
+                                <size key="designTimeSize" width="108" height="30"/>
+                            </touchBarItem>
+                            <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFlexibleSpace" id="fu4-Uq-oJH"/>
+                        </touchBarItems>
+                    </touchBar>
                     <connections>
                         <outlet property="debugTextView" destination="BaK-Ih-zl6" id="huq-Nz-7Lw"/>
                         <outlet property="generateButton" destination="7EP-ls-0uP" id="RLJ-8Z-P8F"/>
@@ -645,6 +668,10 @@
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyI-nO-hnt">
                                 <rect key="frame" x="18" y="263" width="89" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="3Tb-A9-raj"/>
+                                    <constraint firstAttribute="width" constant="85" id="qvV-Cg-7YO"/>
+                                </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Custom Start:" id="uMf-n1-IJg">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -654,7 +681,8 @@
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6qi-Ew-lb6">
                                 <rect key="frame" x="113" y="261" width="96" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="fXb-jB-FjV"/>
+                                    <constraint firstAttribute="height" constant="22" id="Qae-ZQ-YIe"/>
+                                    <constraint firstAttribute="width" constant="96" id="qhX-mj-q7Z"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="x" drawsBackground="YES" id="L1D-VW-wfU">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="nt2-KP-ypj"/>
@@ -666,7 +694,8 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltD-ot-zM8">
                                 <rect key="frame" x="209" y="264" width="13" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="9" id="mQ9-73-ogz"/>
+                                    <constraint firstAttribute="width" constant="9" id="Pvn-8d-HUd"/>
+                                    <constraint firstAttribute="height" constant="17" id="r59-aK-rTv"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="," id="BNu-CN-WLB">
                                     <font key="font" metaFont="system"/>
@@ -676,6 +705,10 @@
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zwg-BR-1cM">
                                 <rect key="frame" x="223" y="261" width="96" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="2BW-pe-gxR"/>
+                                    <constraint firstAttribute="height" constant="22" id="wj4-CI-17o"/>
+                                </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="y" drawsBackground="YES" id="hQn-L6-m2A">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="xPb-Za-2o0"/>
                                     <font key="font" metaFont="system"/>
@@ -685,6 +718,10 @@
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fe5-oP-c5P">
                                 <rect key="frame" x="321" y="254" width="58" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="IBb-BA-4W3"/>
+                                    <constraint firstAttribute="height" constant="21" id="JMc-dB-gOM"/>
+                                </constraints>
                                 <buttonCell key="cell" type="push" title="Go" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HDd-yw-TRi">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -695,6 +732,10 @@
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rxz-Cp-Wpf">
                                 <rect key="frame" x="379" y="254" width="72" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="WHY-yF-CpT"/>
+                                    <constraint firstAttribute="height" constant="21" id="puw-OR-CZn"/>
+                                </constraints>
                                 <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Jrs-iJ-GJi">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -731,25 +772,62 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Fe5-oP-c5P" firstAttribute="leading" secondItem="zwg-BR-1cM" secondAttribute="trailing" constant="8" symbolic="YES" id="0VJ-0r-zhT"/>
-                            <constraint firstItem="6qi-Ew-lb6" firstAttribute="baseline" secondItem="ltD-ot-zM8" secondAttribute="baseline" id="2Xz-Jf-hf0"/>
-                            <constraint firstItem="zwg-BR-1cM" firstAttribute="baseline" secondItem="Fe5-oP-c5P" secondAttribute="baseline" id="9tj-Gq-kzv"/>
-                            <constraint firstItem="rxz-Cp-Wpf" firstAttribute="leading" secondItem="Fe5-oP-c5P" secondAttribute="trailing" constant="12" symbolic="YES" id="G3e-EJ-zwy"/>
-                            <constraint firstAttribute="trailing" secondItem="rxz-Cp-Wpf" secondAttribute="trailing" constant="20" symbolic="YES" id="HTG-sk-sg8"/>
-                            <constraint firstItem="ltD-ot-zM8" firstAttribute="baseline" secondItem="zwg-BR-1cM" secondAttribute="baseline" id="HXB-Og-TjP"/>
-                            <constraint firstItem="rxz-Cp-Wpf" firstAttribute="trailing" secondItem="ULA-m5-8Dj" secondAttribute="trailing" id="JC2-cK-ozB"/>
-                            <constraint firstItem="uyI-nO-hnt" firstAttribute="leading" secondItem="ULA-m5-8Dj" secondAttribute="leading" id="PWq-cT-hTQ"/>
-                            <constraint firstItem="ltD-ot-zM8" firstAttribute="leading" secondItem="6qi-Ew-lb6" secondAttribute="trailing" constant="2" id="S1G-cy-OnA"/>
-                            <constraint firstAttribute="bottom" secondItem="ULA-m5-8Dj" secondAttribute="bottom" constant="20" symbolic="YES" id="SDH-fG-bQx"/>
-                            <constraint firstItem="uyI-nO-hnt" firstAttribute="leading" secondItem="u6i-qj-BqW" secondAttribute="leading" constant="20" symbolic="YES" id="Swp-tt-V06"/>
-                            <constraint firstItem="uyI-nO-hnt" firstAttribute="top" secondItem="u6i-qj-BqW" secondAttribute="top" constant="20" symbolic="YES" id="XLY-LX-mES"/>
-                            <constraint firstItem="ULA-m5-8Dj" firstAttribute="top" secondItem="uyI-nO-hnt" secondAttribute="bottom" constant="8" symbolic="YES" id="Z7R-xa-Y93"/>
-                            <constraint firstItem="zwg-BR-1cM" firstAttribute="leading" secondItem="ltD-ot-zM8" secondAttribute="trailing" constant="3" id="ZQa-fR-2ne"/>
-                            <constraint firstItem="Fe5-oP-c5P" firstAttribute="baseline" secondItem="rxz-Cp-Wpf" secondAttribute="baseline" id="aAR-rl-Exp"/>
-                            <constraint firstItem="uyI-nO-hnt" firstAttribute="centerY" secondItem="6qi-Ew-lb6" secondAttribute="centerY" id="g3F-wq-FeO"/>
-                            <constraint firstItem="6qi-Ew-lb6" firstAttribute="leading" secondItem="uyI-nO-hnt" secondAttribute="trailing" constant="8" symbolic="YES" id="xaM-zC-2Ef"/>
+                            <constraint firstItem="ltD-ot-zM8" firstAttribute="top" secondItem="u6i-qj-BqW" secondAttribute="top" constant="19" id="1ha-jJ-oG7"/>
+                            <constraint firstAttribute="bottom" secondItem="ULA-m5-8Dj" secondAttribute="bottom" constant="20" id="4lN-V4-tHE"/>
+                            <constraint firstItem="rxz-Cp-Wpf" firstAttribute="leading" secondItem="Fe5-oP-c5P" secondAttribute="trailing" constant="12" id="5aR-Oq-ghN"/>
+                            <constraint firstItem="uyI-nO-hnt" firstAttribute="top" secondItem="u6i-qj-BqW" secondAttribute="top" constant="20" id="7yZ-WO-Ins"/>
+                            <constraint firstItem="Fe5-oP-c5P" firstAttribute="top" secondItem="u6i-qj-BqW" secondAttribute="top" constant="18" id="8bT-KZ-D7M"/>
+                            <constraint firstItem="zwg-BR-1cM" firstAttribute="top" secondItem="u6i-qj-BqW" secondAttribute="top" constant="17" id="8qI-uQ-FmP"/>
+                            <constraint firstItem="6qi-Ew-lb6" firstAttribute="top" secondItem="u6i-qj-BqW" secondAttribute="top" constant="17" id="AmU-pe-mpW"/>
+                            <constraint firstItem="ULA-m5-8Dj" firstAttribute="top" secondItem="rxz-Cp-Wpf" secondAttribute="bottom" constant="6" id="F0J-Yf-atN"/>
+                            <constraint firstItem="rxz-Cp-Wpf" firstAttribute="leading" secondItem="Fe5-oP-c5P" secondAttribute="trailing" constant="12" id="Jbn-uV-zQg"/>
+                            <constraint firstItem="zwg-BR-1cM" firstAttribute="leading" secondItem="ltD-ot-zM8" secondAttribute="trailing" constant="3" id="KpM-hU-VcU"/>
+                            <constraint firstItem="ltD-ot-zM8" firstAttribute="leading" secondItem="6qi-Ew-lb6" secondAttribute="trailing" constant="2" id="W1W-lO-Rtx"/>
+                            <constraint firstItem="ltD-ot-zM8" firstAttribute="leading" secondItem="6qi-Ew-lb6" secondAttribute="trailing" constant="2" id="XWC-h5-whb"/>
+                            <constraint firstItem="6qi-Ew-lb6" firstAttribute="leading" secondItem="uyI-nO-hnt" secondAttribute="trailing" constant="8" id="cio-rz-dWs"/>
+                            <constraint firstItem="ULA-m5-8Dj" firstAttribute="leading" secondItem="u6i-qj-BqW" secondAttribute="leading" constant="20" id="dY2-5z-LUA"/>
+                            <constraint firstItem="rxz-Cp-Wpf" firstAttribute="top" secondItem="u6i-qj-BqW" secondAttribute="top" constant="18" id="f5T-CQ-hon"/>
+                            <constraint firstAttribute="trailing" secondItem="ULA-m5-8Dj" secondAttribute="trailing" constant="20" id="hPS-mT-lok"/>
+                            <constraint firstItem="Fe5-oP-c5P" firstAttribute="leading" secondItem="zwg-BR-1cM" secondAttribute="trailing" constant="8" id="maf-HV-lL2"/>
+                            <constraint firstItem="uyI-nO-hnt" firstAttribute="leading" secondItem="u6i-qj-BqW" secondAttribute="leading" constant="20" id="qRb-kr-cNS"/>
+                            <constraint firstItem="Fe5-oP-c5P" firstAttribute="leading" secondItem="zwg-BR-1cM" secondAttribute="trailing" constant="8" id="sCB-3G-GiL"/>
+                            <constraint firstItem="zwg-BR-1cM" firstAttribute="leading" secondItem="ltD-ot-zM8" secondAttribute="trailing" constant="3" id="ymi-LB-zJ3"/>
                         </constraints>
                     </view>
+                    <touchBar key="touchBar" id="sVl-IM-Tvg">
+                        <touchBarItems>
+                            <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFlexibleSpace" id="6EQ-W6-aGT"/>
+                            <touchBarItem id="89h-RB-X1G">
+                                <viewController key="viewController" id="zvm-Hr-52J">
+                                    <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="foa-4T-pXn">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <buttonCell key="cell" type="push" title="Go" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mFM-ZB-88N">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="performClick:" target="Fe5-oP-c5P" id="ipO-yb-fEf"/>
+                                        </connections>
+                                    </button>
+                                </viewController>
+                            </touchBarItem>
+                            <touchBarItem id="KyJ-VJ-658">
+                                <viewController key="viewController" id="4jH-yD-L5u">
+                                    <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aIY-Y0-zgU">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MIY-zf-pAz">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="performClick:" target="rxz-Cp-Wpf" id="QAH-xZ-PC5"/>
+                                        </connections>
+                                    </button>
+                                </viewController>
+                            </touchBarItem>
+                            <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFlexibleSpace" id="Kf4-Zk-702"/>
+                        </touchBarItems>
+                    </touchBar>
                     <connections>
                         <outlet property="outputTextView" destination="GWV-1u-3tr" id="s8N-61-9iw"/>
                         <outlet property="xStartTextField" destination="6qi-Ew-lb6" id="27K-gs-daS"/>
@@ -760,14 +838,99 @@
             </objects>
             <point key="canvasLocation" x="599.5" y="626"/>
         </scene>
-        <!--Neural Network-->
+        <!--Train-->
         <scene sceneID="AyA-DU-lHN">
             <objects>
-                <viewController title="Neural Network" id="U7W-dh-zKt" sceneMemberID="viewController">
+                <viewController title="Train" id="U7W-dh-zKt" customClass="TrainViewController" customModule="neural_network_navigation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="S5R-ba-WxE">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ul7-1d-njY">
+                                <rect key="frame" x="18" y="263" width="38" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Train:" id="Qhn-tP-Y6U">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhF-bA-hDy">
+                                <rect key="frame" x="62" y="260" width="96" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="n times" drawsBackground="YES" id="DPL-eh-eDj">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="irA-nQ-otZ">
+                                <rect key="frame" x="160" y="253" width="81" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Go" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IZ3-CH-CGe">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="goButton:" target="U7W-dh-zKt" id="3Ez-um-xfb"/>
+                                </connections>
+                            </button>
+                            <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDY-SE-1TQ">
+                                <rect key="frame" x="20" y="20" width="410" height="232"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <clipView key="contentView" ambiguous="YES" id="hOs-Ir-fRS">
+                                    <rect key="frame" x="1" y="1" width="408" height="230"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView ambiguous="YES" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="biS-Mn-Xyr">
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="230"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="408" height="230"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ufl-wX-iJs">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="0wt-ID-lrl">
+                                    <rect key="frame" x="393" y="1" width="16" height="230"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ul7-1d-njY" firstAttribute="leading" secondItem="S5R-ba-WxE" secondAttribute="leading" constant="20" symbolic="YES" id="sVW-0G-MKM"/>
+                            <constraint firstItem="ul7-1d-njY" firstAttribute="top" secondItem="S5R-ba-WxE" secondAttribute="top" constant="20" symbolic="YES" id="snj-HV-jfU"/>
+                        </constraints>
                     </view>
+                    <touchBar key="touchBar" id="wk5-Eu-Ye9">
+                        <touchBarItems>
+                            <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFlexibleSpace" id="Ifw-cR-UWA"/>
+                            <touchBarItem id="BDh-qA-Tig">
+                                <viewController key="viewController" id="eJh-w8-NAh">
+                                    <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0oL-Xz-wwk">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <buttonCell key="cell" type="push" title="Go" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KnT-cu-2fx">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="performClick:" target="irA-nQ-otZ" id="DpM-Jd-Ftz"/>
+                                        </connections>
+                                    </button>
+                                </viewController>
+                            </touchBarItem>
+                            <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFlexibleSpace" id="y6U-sd-Xdv"/>
+                        </touchBarItems>
+                    </touchBar>
+                    <connections>
+                        <outlet property="outputTextView" destination="biS-Mn-Xyr" id="VZ9-P0-LJt"/>
+                        <outlet property="timesTextField" destination="zhF-bA-hDy" id="xna-SI-KCe"/>
+                    </connections>
                 </viewController>
                 <customObject id="aq2-r6-Fjr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

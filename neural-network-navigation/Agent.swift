@@ -8,6 +8,12 @@
 
 import Foundation
 
+protocol AgentTrainer {
+    func shouldTrainNetwork() -> Bool
+    func correctAnswer(currentPos: Vector2, endPos: Vector2) -> [Float]
+    func tripCompleted(withTrainingError error: Float?)
+}
+
 /**
 The "agent" that travels in the city along the path
  */
@@ -37,12 +43,17 @@ class Agent {
     /**
      Travels down the path each step
      */
-    func runTrip(printer: (String) -> Void) {
+    func runTrip(withTrainer trainer: AgentTrainer?, printer: (String) -> Void) {
+        var error: Float
         currentPos = startPos
         printer("currentPos: \(currentPos) (endPos: \(endPos))")
         while currentPos != endPos {
             let input = sense()
             guard let output = try? network.update(inputs: input) else { return }
+            if let trainer = trainer, trainer.shouldTrainNetwork() {
+                error = try? network.backpropagate(answer: trainer.correctAnswer(currentPos: currentPos, endPos: endPos))
+            }
+            
             guard let dir = output.max() else { return }
             switch output.index(of: dir)! {
             case 0: currentPos += Vector2.up; printer("Going up")
@@ -51,8 +62,17 @@ class Agent {
             case 3: currentPos += Vector2.right; printer("Going right")
             default: break
             }
+            if currentPos.isOutOf(bounds: city.size) {
+                printer("Going out of bounds")
+                break
+            }
         }
         printer("At end. currentPos: \(currentPos) (endPos: \(endPos))")
+        if let trainer = trainer, trainer.shouldTrainNetwork() {
+            trainer.tripCompleted(withTrainingError: error)
+        } else {
+            trainer?.tripCompleted(withTrainingError: nil)
+        }
     }
     
     /**

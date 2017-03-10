@@ -81,6 +81,10 @@ struct Vector2: CustomStringConvertible {
         let y = Utils.random(min: 0, max: max.y)
         return Vector2(x: x, y: y)
     }
+    
+    func isOutOf(bounds: Vector2) -> Bool {
+        return (self.x >= bounds.x || self.x < 0) || (self.y >= bounds.y || self.y < 0)
+    }
 }
 
 
