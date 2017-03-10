@@ -50,32 +50,40 @@ class City {
             else {
                 let isOpenRoad = Random.numberFromZeroToOne() < openRoadBias
                 node.connections.up = isOpenRoad
+                node.connections.upWeight = Float(Utils.random(min: 1, max: 5))
                 guard let upNode = nodes.object(at: oneDimFormula(coor: coor + Vector2.up)) as? Intersection else { break }
                 upNode.connections.down = isOpenRoad
+                upNode.connections.downWeight = Float(Utils.random(min: 1, max: 5))
             }
             // down
             if coor.y <= 0 { node.connections.down = false }
             else {
                 let isOpenRoad = Random.numberFromZeroToOne() < openRoadBias
                 node.connections.down = isOpenRoad
+                node.connections.downWeight = Float(Utils.random(min: 1, max: 5))
                 guard let downNode = nodes.object(at: oneDimFormula(coor: coor + Vector2.down)) as? Intersection else { break }
                 downNode.connections.up = isOpenRoad
+                downNode.connections.upWeight = Float(Utils.random(min: 1, max: 5))
             }
             // left
             if coor.x <= 0 { node.connections.left = false }
             else {
                 let isOpenRoad = Random.numberFromZeroToOne() < openRoadBias
                 node.connections.left = isOpenRoad
+                node.connections.leftWeight = Float(Utils.random(min: 1, max: 5))
                 guard let leftNode = nodes.object(at: oneDimFormula(coor: coor + Vector2.left)) as? Intersection else { break }
                 leftNode.connections.right = isOpenRoad
+                leftNode.connections.rightWeight = Float(Utils.random(min: 1, max: 5))
             }
             // right
             if coor.x >= xLim - 1 { node.connections.right = false }
             else {
                 let isOpenRoad = Random.numberFromZeroToOne() < openRoadBias
                 node.connections.right = isOpenRoad
+                node.connections.rightWeight = Float(Utils.random(min: 1, max: 5))
                 guard let rightNode = nodes.object(at: oneDimFormula(coor: coor + Vector2.right)) as? Intersection else { break }
                 rightNode.connections.left = isOpenRoad
+                rightNode.connections.leftWeight = Float(Utils.random(min: 1, max: 5))
             }
             
             // Delegate
@@ -117,6 +125,7 @@ class City {
     
     struct Connections {
         var up, down, left, right: Bool?
+        var upWeight = Float(1), downWeight = Float(1), leftWeight = Float(1), rightWeight = Float(1)
     }
     
 }
