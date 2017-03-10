@@ -34,7 +34,7 @@ class CityBuilder {
     
     
     func setupNetwork() {
-        network = FFNN(inputs: 6, hidden: 4, outputs: 4)
+        network = FFNN(inputs: 6, hidden: 2, outputs: 4)
     }
     
     func newTrip(printer: (String) -> Void) {
@@ -54,12 +54,15 @@ class CityBuilder {
         }
         printer("Errors of all training trials")
         printer("\(trainer.errors)")
+        printer("Distance of all training trials")
+        printer("\(trainer.distances)")
     }
 }
 
 class NetworkTrainer: AgentTrainer {
     
     var errors = [Float]()
+    var distances = [Int]()
     var city: City
     var useFastPath = false
     var visited = [Vector2]()
@@ -106,6 +109,10 @@ class NetworkTrainer: AgentTrainer {
     }
     func tripCompleted(withTrainingError error: Float?) {
         if let error = error { errors.append(error) }
+    }
+    
+    func tripCompleted(withDistance distance: Int) {
+        distances.append(distance)
     }
     
 }

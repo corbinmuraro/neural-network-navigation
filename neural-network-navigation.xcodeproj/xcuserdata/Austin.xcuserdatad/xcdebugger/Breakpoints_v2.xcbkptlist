@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "neural-network-navigation/Agent.swift"
-            timestampString = "510822501.271436"
+            timestampString = "510826723.053065"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "runTrip(withTrainer:printer:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "neural-network-navigation/CityBuilder.swift"
-            timestampString = "510820552.849971"
+            timestampString = "510826723.053065"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "correctAnswer(currentPos:endPos:)"
             landmarkType = "7">
          </BreakpointContent>

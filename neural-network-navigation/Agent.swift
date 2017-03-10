@@ -12,6 +12,7 @@ protocol AgentTrainer {
     func shouldTrainNetwork() -> Bool
     func correctAnswer(currentPos: Vector2, endPos: Vector2) -> [Float]?
     func tripCompleted(withTrainingError error: Float?)
+    func tripCompleted(withDistance distance: Int)
 }
 
 /**
@@ -49,6 +50,7 @@ class Agent {
      */
     func runTrip(withTrainer trainer: AgentTrainer?, printer: (String) -> Void) {
         var error: Float? = nil
+        var dist: Int? = nil
         currentPos = startPos
         printer("currentPos: \(currentPos) (endPos: \(endPos))")
         var counter = city.nodes.count * 3
@@ -82,6 +84,8 @@ class Agent {
         printer("At end. currentPos: \(currentPos) (endPos: \(endPos))")
         if let trainer = trainer, trainer.shouldTrainNetwork() {
             trainer.tripCompleted(withTrainingError: error)
+            let distance = endPos.distance(to: currentPos)
+            trainer.tripCompleted(withDistance: distance)
         } else {
             trainer?.tripCompleted(withTrainingError: nil)
         }

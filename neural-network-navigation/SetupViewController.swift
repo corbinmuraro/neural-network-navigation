@@ -31,6 +31,9 @@ class SetupViewController: NSViewController {
         let openRoadBias = formatter.number(fromUngrouped: openRoadBiasTextField.stringValue)?.doubleValue ?? 1
         let minWeight = formatter.number(fromUngrouped: minWeightTextField.stringValue)?.intValue ?? 1
         let maxWeight = formatter.number(fromUngrouped: maxWeightTextField.stringValue)?.intValue ?? 2
+        
+        DataSourse.shared.newCityBuilder()
+        
         generateCity(ofSize: Vector2(x: xSize, y: ySize), openRoadBias: openRoadBias, weights: (minWeight, maxWeight), completion: {
             self.loadingLabel.stringValue = "Done"
             self.generateButton.isEnabled = true
