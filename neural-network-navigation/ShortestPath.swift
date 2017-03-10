@@ -69,7 +69,7 @@ class Pathfinder {
             }
         }
         
-        var pathVertices:[City.Intersection] = [finish]
+        var pathVertices:[Intersection] = [finish]
         var child = finish
         while (child != start) {
             child = previousPaths[child]!
