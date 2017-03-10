@@ -68,7 +68,13 @@ class Pathfinder {
             }
             
             for neighbor in neighbors {
-                let distance = distances[closestNode!]! + 1 // assuming weight of all roads is 1
+                let dir = (neighbor.coor - closestNode!.coor).normalized()
+                var weight = Float(1)
+                if dir == Vector2.up { weight = closestNode!.connections.upWeight }
+                if dir == Vector2.down { weight = closestNode!.connections.downWeight }
+                if dir == Vector2.left { weight = closestNode!.connections.leftWeight }
+                if dir == Vector2.right { weight = closestNode!.connections.rightWeight }
+                let distance = distances[closestNode!]! + Double(weight)
                 //print(distance)
                 //print(closestNode ?? "...")
                 if distance < distances[neighbor]! {
@@ -84,10 +90,10 @@ class Pathfinder {
         //print(distances)
         var pathVertices = [finish]
         var child = finish
-        print(previousPaths)
+        //print(previousPaths)
         while (child != start) {
             if let _child = previousPaths[child] {
-                print(child.coor)
+                //print(child.coor)
                 child = _child
                 pathVertices.append(child)
             } else {

@@ -36,12 +36,14 @@ class City {
     func intersection(at coor: Vector2) -> Intersection? { return  nodes.object(at: oneDimFormula(coor: coor)) as? Intersection }
     func set(intersection: Intersection, at coor: (x: Int, y: Int)) { nodes.replaceObject(at: oneDimFormula(coor: Vector2(x: coor.x, y: coor.y)), with: intersection) }
     
-    func generate(openRoadBias: Double, delegate: CityGeneratorDelegate?) {
+    func generate(openRoadBias: Double, weights: Range, delegate: CityGeneratorDelegate?) {
         generateIntersections(delegate: delegate)
-        generateConnections(openRoadBias: openRoadBias, delegate: delegate)
+        generateConnections(openRoadBias: openRoadBias, weights: weights, delegate: delegate)
     }
     
-    func generateConnections(openRoadBias: Double, delegate: CityGeneratorDelegate?) {
+    func generateConnections(openRoadBias: Double, weights: Range, delegate: CityGeneratorDelegate?) {
+        let min = weights.min
+        let max = weights.max
         for idx in 0..<nodes.count {
             guard let node = nodes.object(at: idx) as? Intersection else { continue }
             let coor = node.coor
@@ -50,40 +52,40 @@ class City {
             else {
                 let isOpenRoad = Random.numberFromZeroToOne() < openRoadBias
                 node.connections.up = isOpenRoad
-                node.connections.upWeight = Float(Utils.random(min: 1, max: 5))
+                node.connections.upWeight = Float(Utils.random(min: min, max: max))
                 guard let upNode = nodes.object(at: oneDimFormula(coor: coor + Vector2.up)) as? Intersection else { break }
                 upNode.connections.down = isOpenRoad
-                upNode.connections.downWeight = Float(Utils.random(min: 1, max: 5))
+                upNode.connections.downWeight = Float(Utils.random(min: min, max: max))
             }
             // down
             if coor.y <= 0 { node.connections.down = false }
             else {
                 let isOpenRoad = Random.numberFromZeroToOne() < openRoadBias
                 node.connections.down = isOpenRoad
-                node.connections.downWeight = Float(Utils.random(min: 1, max: 5))
+                node.connections.downWeight = Float(Utils.random(min: min, max: max))
                 guard let downNode = nodes.object(at: oneDimFormula(coor: coor + Vector2.down)) as? Intersection else { break }
                 downNode.connections.up = isOpenRoad
-                downNode.connections.upWeight = Float(Utils.random(min: 1, max: 5))
+                downNode.connections.upWeight = Float(Utils.random(min: min, max: max))
             }
             // left
             if coor.x <= 0 { node.connections.left = false }
             else {
                 let isOpenRoad = Random.numberFromZeroToOne() < openRoadBias
                 node.connections.left = isOpenRoad
-                node.connections.leftWeight = Float(Utils.random(min: 1, max: 5))
+                node.connections.leftWeight = Float(Utils.random(min: min, max: max))
                 guard let leftNode = nodes.object(at: oneDimFormula(coor: coor + Vector2.left)) as? Intersection else { break }
                 leftNode.connections.right = isOpenRoad
-                leftNode.connections.rightWeight = Float(Utils.random(min: 1, max: 5))
+                leftNode.connections.rightWeight = Float(Utils.random(min: min, max: max))
             }
             // right
             if coor.x >= xLim - 1 { node.connections.right = false }
             else {
                 let isOpenRoad = Random.numberFromZeroToOne() < openRoadBias
                 node.connections.right = isOpenRoad
-                node.connections.rightWeight = Float(Utils.random(min: 1, max: 5))
+                node.connections.rightWeight = Float(Utils.random(min: min, max: max))
                 guard let rightNode = nodes.object(at: oneDimFormula(coor: coor + Vector2.right)) as? Intersection else { break }
                 rightNode.connections.left = isOpenRoad
-                rightNode.connections.leftWeight = Float(Utils.random(min: 1, max: 5))
+                rightNode.connections.leftWeight = Float(Utils.random(min: min, max: max))
             }
             
             // Delegate

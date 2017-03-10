@@ -17,6 +17,8 @@ class SetupViewController: NSViewController {
     @IBOutlet weak var loadingLabel: NSTextField!
     @IBOutlet weak var debugTextView: NSTextView!
     @IBOutlet weak var generateButton: NSButton!
+    @IBOutlet weak var minWeightTextField: NSTextField!
+    @IBOutlet weak var maxWeightTextField: NSTextField!
 
     @IBAction func generateCity(_ sender: NSButton) {
         loadingLabel.stringValue = "Loading"
@@ -27,7 +29,9 @@ class SetupViewController: NSViewController {
         let xSize = formatter.number(fromUngrouped: xSizeTextField.stringValue)?.intValue ?? 10
         let ySize = formatter.number(fromUngrouped: ySizeTextField.stringValue)?.intValue ?? 10
         let openRoadBias = formatter.number(fromUngrouped: openRoadBiasTextField.stringValue)?.doubleValue ?? 1
-        generateCity(ofSize: Vector2(x: xSize, y: ySize), openRoadBias: openRoadBias, completion: {
+        let minWeight = formatter.number(fromUngrouped: minWeightTextField.stringValue)?.intValue ?? 1
+        let maxWeight = formatter.number(fromUngrouped: maxWeightTextField.stringValue)?.intValue ?? 2
+        generateCity(ofSize: Vector2(x: xSize, y: ySize), openRoadBias: openRoadBias, weights: (minWeight, maxWeight), completion: {
             self.loadingLabel.stringValue = "Done"
             self.generateButton.isEnabled = true
             self.printToDebugView()
@@ -56,10 +60,10 @@ class SetupViewController: NSViewController {
     
     // Mark: Internal Functions
     
-    private func generateCity(ofSize size: Vector2, openRoadBias: Double, completion: @escaping () -> Void) {
+    private func generateCity(ofSize size: Vector2, openRoadBias: Double, weights: Range, completion: @escaping () -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             DataSourse.shared.newCityBuilder()
-            self.cityBuilder?.build(cityArea: size, openRoadBias: openRoadBias, delegate: self, completion: {
+            self.cityBuilder?.build(cityArea: size, openRoadBias: openRoadBias, weights: weights, delegate: self, completion: {
                 
             })
             // When generation is done

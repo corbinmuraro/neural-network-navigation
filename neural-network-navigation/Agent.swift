@@ -51,7 +51,8 @@ class Agent {
         var error: Float? = nil
         currentPos = startPos
         printer("currentPos: \(currentPos) (endPos: \(endPos))")
-        while currentPos != endPos {
+        var counter = city.nodes.count * 3
+        while currentPos != endPos && counter > 0 {
             let input = sense()
             guard let output = try? network.update(inputs: input) else { return }
             if let trainer = trainer, trainer.shouldTrainNetwork() {
@@ -76,6 +77,7 @@ class Agent {
                 printer("Going out of bounds")
                 break
             }
+            counter -= 1
         }
         printer("At end. currentPos: \(currentPos) (endPos: \(endPos))")
         if let trainer = trainer, trainer.shouldTrainNetwork() {
