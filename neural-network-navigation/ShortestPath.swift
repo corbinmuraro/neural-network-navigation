@@ -90,10 +90,10 @@ class Pathfinder {
         //print(distances)
         var pathVertices = [finish]
         var child = finish
-        print(previousPaths)
+        //print(previousPaths)
         while (child != start) {
             if let _child = previousPaths[child] {
-                print(child.coor)
+                //print(child.coor)
                 child = _child
                 pathVertices.append(child)
             } else {

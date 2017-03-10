@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "neural-network-navigation/City.swift"
-            timestampString = "510694751.822861"
+            timestampString = "510822674.295036"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "generateConnections(openRoadBias:delegate:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "neural-network-navigation/City.swift"
-            timestampString = "510821030.0389"
+            timestampString = "510822674.295036"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "generateConnections(openRoadBias:delegate:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "neural-network-navigation/Agent.swift"
-            timestampString = "510814416.27708"
+            timestampString = "510822501.271436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "runTrip(withTrainer:printer:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -287,7 +287,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
             endingLineNumber = "102"
-            landmarkName = "dijkstra(city:start:finish:)"
+            landmarkName = "fastPath(visited:city:start:end:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
