@@ -44,14 +44,16 @@ class Agent {
      Travels down the path each step
      */
     func runTrip(withTrainer trainer: AgentTrainer?, printer: (String) -> Void) {
-        var error: Float
+        var error: Float? = nil
         currentPos = startPos
         printer("currentPos: \(currentPos) (endPos: \(endPos))")
         while currentPos != endPos {
             let input = sense()
             guard let output = try? network.update(inputs: input) else { return }
             if let trainer = trainer, trainer.shouldTrainNetwork() {
-                error = try? network.backpropagate(answer: trainer.correctAnswer(currentPos: currentPos, endPos: endPos))
+                if let _error = try? network.backpropagate(answer: trainer.correctAnswer(currentPos: currentPos, endPos: endPos)) {
+                    error = _error
+                }
             }
             
             guard let dir = output.max() else { return }

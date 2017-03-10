@@ -12,14 +12,18 @@ class CityInspectorViewController: NSViewController {
     
     var cityBuilder: CityBuilder? { return DataSourse.shared.cityBuilder }
 
-    @IBOutlet weak var viewNodeTextField: NSTextField!
+    @IBOutlet weak var xCoorTextField: NSTextField!
+    @IBOutlet weak var yCoorTextField: NSTextField!
     @IBAction func viewNode(_ sender: NSButtonCell) {
         let formatter = NumberFormatter()
-        let nodeID = formatter.number(fromUngrouped: viewNodeTextField.stringValue)?.intValue
+        let xCoor = formatter.number(fromUngrouped: xCoorTextField.stringValue)?.intValue ?? 0
+        let yCoor = formatter.number(fromUngrouped: yCoorTextField.stringValue)?.intValue ?? 0
+        let coor = Vector2(x: xCoor, y: yCoor)
+
         
         var output = ""
-        if let city = cityBuilder?.city, let nodeID = nodeID, let node = city.nodes[nodeID] as? City.Intersection {
-            output.append("For node: \(nodeID)\n")
+        if let city = cityBuilder?.city, let node = city.intersection(at: coor) {
+            output.append("For node: \(coor)\n")
             output.append("Node ID: \(node.id)\n")
             output.append("Node Coordinates: (\(node.coor.x),\(node.coor.y))\n")
             output.append("Roads:\n")

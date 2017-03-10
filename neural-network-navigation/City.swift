@@ -23,17 +23,17 @@ class City {
         
     init(size: Vector2) {
         xLim = size.x; yLim = size.y
-        let capacity = oneDimFormula(coor: Vector2(x: xLim, y: yLim))
+        let capacity = oneDimFormula(coor: Vector2(x: xLim, y: yLim - 1))
         nodes = NSMutableArray(capacity: capacity)
         for _ in 0..<capacity {
             nodes.add(Intersection.zero)
         }
     }
     
-    private func oneDimFormula(coor: Vector2) -> Int { return coor.y * (xLim - 1) + coor.x }
+    private func oneDimFormula(coor: Vector2) -> Int { return coor.y * xLim + coor.x }
     private func twoDimFormula(idx: Int) -> Vector2 { return Vector2(x:idx % (xLim), y: idx / (xLim)) }
     
-    func intersection(at coor: Vector2) -> Intersection? { return  nodes.object(at: oneDimFormula(coor: Vector2(x: coor.x, y: coor.y))) as? Intersection }
+    func intersection(at coor: Vector2) -> Intersection? { return  nodes.object(at: oneDimFormula(coor: coor)) as? Intersection }
     func set(intersection: Intersection, at coor: (x: Int, y: Int)) { nodes.replaceObject(at: oneDimFormula(coor: Vector2(x: coor.x, y: coor.y)), with: intersection) }
     
     func generate(openRoadBias: Double, delegate: CityGeneratorDelegate?) {
@@ -86,7 +86,7 @@ class City {
     }
     
     func generateIntersections(delegate: CityGeneratorDelegate?) {
-        for i in 0..<oneDimFormula(coor: Vector2(x: xLim, y: yLim)) {
+        for i in 0..<oneDimFormula(coor: Vector2(x: xLim, y: yLim - 1)) {
             nodes.replaceObject(at: i, with: Intersection(id: i, coor: twoDimFormula(idx: i)))
             
             // Delegate

@@ -12,7 +12,7 @@ import Foundation
 // OUTPUTS: dictionary with line segments building up the shortest path
 func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) -> [City.Intersection:City.Intersection] {
     
-    let intersections = city.nodes.copy()
+    let intersections = city.nodes
     var distances:[City.Intersection:Double] = [:] // empty dictionary with pairs of Intersection, Double
     var previousPaths:[City.Intersection:City.Intersection] = [:] // empty dictionary with pairs of Intersection, Double
     

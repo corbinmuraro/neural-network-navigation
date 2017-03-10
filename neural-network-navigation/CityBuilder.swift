@@ -24,9 +24,9 @@ class CityBuilder {
         setupNetwork()
     }
     
-    func build(cityArea: Vector2, delegate: CityGeneratorDelegate?, completion: () -> Void) {
+    func build(cityArea: Vector2, openRoadBias: Double, delegate: CityGeneratorDelegate?, completion: () -> Void) {
         self.city = City(size: cityArea)
-        city.generate(openRoadBias: 0.75, delegate: delegate)
+        city.generate(openRoadBias: openRoadBias, delegate: delegate)
 
         // Calls the completion() callback for the caller
         completion()

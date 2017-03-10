@@ -17,7 +17,6 @@
 		6C5D37EF1E60BAEF0011713A /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37E81E60BAEF0011713A /* Vector.swift */; };
 		6C5D37F11E60BCA10011713A /* CityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D37F01E60BCA10011713A /* CityBuilder.swift */; };
 		D9086ABE1E7228EB005DB27F /* TrainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9086ABD1E7228EB005DB27F /* TrainViewController.swift */; };
-		D9086AC01E722F60005DB27F /* Pathfinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9086ABF1E722F60005DB27F /* Pathfinder.swift */; };
 		D9A309FC1E6755450028BC31 /* CityInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A309FB1E6755450028BC31 /* CityInspectorViewController.swift */; };
 		D9A309FE1E6757D90028BC31 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A309FD1E6757D90028BC31 /* Data.swift */; };
 		D9A5DE081E64BC8500D4566E /* CustomWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5DE071E64BC8500D4566E /* CustomWindowController.swift */; };
@@ -42,7 +41,6 @@
 		6C5D37E81E60BAEF0011713A /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		6C5D37F01E60BCA10011713A /* CityBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityBuilder.swift; sourceTree = "<group>"; };
 		D9086ABD1E7228EB005DB27F /* TrainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
-		D9086ABF1E722F60005DB27F /* Pathfinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pathfinder.swift; sourceTree = "<group>"; };
 		D9A309FB1E6755450028BC31 /* CityInspectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityInspectorViewController.swift; sourceTree = "<group>"; };
 		D9A309FD1E6757D90028BC31 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D9A5DE071E64BC8500D4566E /* CustomWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWindowController.swift; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 				6C5D37F01E60BCA10011713A /* CityBuilder.swift */,
 				D9AB4D001E7087AA002F1791 /* Agent.swift */,
 				6C59830F1E6D8B1F00355C18 /* ShortestPath.swift */,
-				D9086ABF1E722F60005DB27F /* Pathfinder.swift */,
 			);
 			name = City;
 			sourceTree = "<group>";
@@ -227,7 +224,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9086AC01E722F60005DB27F /* Pathfinder.swift in Sources */,
 				D9AB4D011E7087AA002F1791 /* Agent.swift in Sources */,
 				6C5D37ED1E60BAEF0011713A /* Random.swift in Sources */,
 				D9A309FE1E6757D90028BC31 /* Data.swift in Sources */,

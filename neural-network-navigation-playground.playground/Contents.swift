@@ -24,12 +24,12 @@ struct Vector2 {
     }
 }
 
-private func oneDimFormula(coor: Vector2) -> Int { return coor.y * (xLim - 1) + coor.x }
+private func oneDimFormula(coor: Vector2) -> Int { return coor.y * (xLim) + coor.x }
 private func twoDimFormula(idx: Int) -> Vector2 { return Vector2(x:idx % (xLim), y: idx / (xLim)) }
 
 let nodes = NSMutableArray(capacity: oneDimFormula(coor: Vector2(x: xLim, y: yLim)))
 
-let m = oneDimFormula(coor: Vector2(x: , y: 0))
+let m = oneDimFormula(coor: Vector2(x: 0, y: 0))
 let one = twoDimFormula(idx: m)
 
 let n = twoDimFormula(idx: 2)
