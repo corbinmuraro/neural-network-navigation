@@ -47,8 +47,10 @@ class CityBuilder {
         let agent = Agent(cityBuilder: self)
         let trainer = NetworkTrainer(city: city)
         for _ in 1...count {
+            print("new Trip")
             agent.newTrip()
             agent.runTrip(withTrainer: trainer, printer: printer)
+            trainer.visited.removeAll()
         }
         printer("Errors of all training trials")
         printer("\(trainer.errors)")
@@ -59,6 +61,8 @@ class NetworkTrainer: AgentTrainer {
     
     var errors = [Float]()
     var city: City
+    var useFastPath = false
+    var visited = [Vector2]()
     
     init(city: City) { self.city = city }
     
@@ -70,7 +74,18 @@ class NetworkTrainer: AgentTrainer {
         if let start = city.intersection(at: currentPos), let end = city.intersection(at: endPos) {
             var answer: [Float] = [0,0,0,0]
             
-            let nextStep = pathfinder.dijkstra(city: city, start: start, finish: end)
+            var nextStep: City.Intersection
+            if useFastPath {
+                let dir = pathfinder.fastPath(visited: &visited, city: city, start: start, end: end)
+                if dir != Vector2.zero {
+                    nextStep = city.intersection(at: currentPos + dir)!
+                } else {
+                    print("no path"); return nil
+                }
+            } else {
+                guard let _nextStep = pathfinder.dijkstra(city: city, start: start, finish: end) else { print("no Answer"); return nil }
+                nextStep = _nextStep
+            }
             let nextCoor = nextStep.coor
             let dir = nextCoor - currentPos
             if dir == Vector2.up {

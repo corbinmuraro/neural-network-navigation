@@ -38,6 +38,10 @@ class Agent {
     func newTrip() {
         startPos = Vector2.random(max: city.size)
         endPos = Vector2.random(max: city.size)
+        while !tripIsValid(start: startPos, end: endPos) {
+            print("trip not valid")
+            newTrip()
+        }
     }
     
     /**
@@ -84,8 +88,8 @@ class Agent {
     /**
      Use the algorithm to test if the two points have a valid path
     */
-    func testTrip(start: Vector2, end: Vector2) -> Bool {
-        return Pathfinder().dijkstra(city: city, start: city.intersection(at: start), finish: city.intersection(at: end)) != nil
+    func tripIsValid(start: Vector2, end: Vector2) -> Bool {
+        return Pathfinder().dijkstra(city: city, start: city.intersection(at: start)!, finish: city.intersection(at: end)!) != nil
     }
     
     /**

@@ -36,7 +36,7 @@ extension NumberFormatter {
     }
 }
 
-struct Vector2: CustomStringConvertible {
+struct Vector2: Equatable, CustomStringConvertible {
     var x: Int
     var y: Int
     
@@ -84,6 +84,30 @@ struct Vector2: CustomStringConvertible {
     
     func isOutOf(bounds: Vector2) -> Bool {
         return (self.x >= bounds.x || self.x < 0) || (self.y >= bounds.y || self.y < 0)
+    }
+    
+    func distance(to dest: Vector2) -> Int {
+        return abs(dest.x - self.x) + abs(dest.y - self.y)
+    }
+    
+    func angle(to dest: Vector2) -> Float {
+        let rad = atan2f(Float(dest.y - self.y), Float(dest.x - self.x))
+        return rad * Float(180 / M_PI)
+    }
+    
+    func normalized() -> Vector2 {
+        switch self.angle(to: Vector2.zero) {
+        case -45...45:
+            return Vector2.right
+        case 45...135:
+            return Vector2.up
+        case 135...180, -180 ... -135:
+            return Vector2.left
+        case -135 ... -45:
+            return Vector2.down
+        default:
+            return Vector2.zero
+        }
     }
 }
 
