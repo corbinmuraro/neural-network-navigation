@@ -10,11 +10,12 @@ import Foundation
 
 // INPUTS:  city, start intersection, end intersection
 // OUTPUTS: dictionary with line segments building up the shortest path
-func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) -> [City.Intersection:City.Intersection] {
+func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) -> City.Intersection {
+    typealias Intersection = City.Intersection
     
-    let intersections = city.nodes
-    var distances:[City.Intersection:Double] = [:] // empty dictionary with pairs of Intersection, Double
-    var previousPaths:[City.Intersection:City.Intersection] = [:] // empty dictionary with pairs of Intersection, Double
+    var intersections:NSMutableArray = city.nodes.copy() as! NSMutableArray
+    var distances:[City.Intersection:Double] = [:] // empty dictionary with pairs of node / distance value for the graph
+    var previousPaths:[City.Intersection:City.Intersection] = [:] // empty array with list of nodes in the shortest path
     
     let currentIntersection: City.Intersection = intersections[0] as! City.Intersection
     
@@ -38,47 +39,47 @@ func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) ->
                 closestNode = intersection
             }
         }
-        
+
         if (closestNode! == finish) {
-            return previousPaths
+            break
         }
         
-//        var nodeIndex:Int? = find(intersections, closestNode!)?
         let nodeIndex:Int? = intersections.index(of: closestNode!)
         intersections.remove(at: nodeIndex!)
 
+        var neighbors = [Intersection]()
+        if let up = closestNode?.connections.up, up {
+            neighbors.append(city.intersection(at: closestNode!.coor + Vector2.up)!)
+        }
+        if let down = closestNode?.connections.down, down {
+            neighbors.append(city.intersection(at: closestNode!.coor + Vector2.down)!)
+        }
+        if let left = closestNode?.connections.left, left {
+            neighbors.append(city.intersection(at: closestNode!.coor + Vector2.left)!)
+        }
+        if let right = closestNode?.connections.right, right {
+            neighbors.append(city.intersection(at: closestNode!.coor + Vector2.right)!)
+        }
         
-      /*
-        if (closestNode?.roads != nil && (closestNode?.roads.count)! > 0) {
-            
-            // closestNode?.roads?.each({(road:Road) -> Void? in
-            for road:City.Road in (closestNode?.roads)! {
-                
-                if (road.a == closestNode) {
-                    // use the road's 'b' vertex to determine distance
-                    let distance = distances[closestNode!]! + closestNode!.distance(to: road.b)
-                    if distance < distances[road.b]! {
-                        distances[road.b]! = distance
-                        previousPaths[road.b] = closestNode!
-                    }
-                }
-                    
-                else {
-                    // use the road's 'a' vertex to determine distance
-                    let distance = distances[closestNode!]! + closestNode!.distance(to: road.a)
-                    if distance < distances[road.a]! {
-                        distances[road.a]! = distance
-                        previousPaths[road.a] = closestNode!
-                    }
-                }
-                
-                
+        for neighbor in neighbors {
+            let distance = distances[closestNode!]! + 1 // assuming weight of all roads is 1
+            if distance < distances[neighbor]! {
+                distances[neighbor]! = distance
+                previousPaths[neighbor] = closestNode!
             }
         }
- */
     }
     
-    return previousPaths
+    var pathVertices:[City.Intersection] = [finish]
+    var child = finish
+    while (child != start) {
+        child = previousPaths[child]!
+        pathVertices.append(child)
+    }
+    
+    return pathVertices[pathVertices.count - 2]
 }
+
+
 
 
