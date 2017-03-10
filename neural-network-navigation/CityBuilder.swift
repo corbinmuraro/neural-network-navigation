@@ -50,6 +50,8 @@ class CityBuilder {
             agent.newTrip()
             agent.runTrip(withTrainer: trainer, printer: printer)
         }
+        printer("Errors of all training trials")
+        printer("\(trainer.errors)")
     }
 }
 
@@ -66,21 +68,19 @@ class NetworkTrainer: AgentTrainer {
     func correctAnswer(currentPos: Vector2, endPos: Vector2) -> [Float]? {
         let pathfinder = Pathfinder()
         if let start = city.intersection(at: currentPos), let end = city.intersection(at: endPos) {
-            var answer: [Float] = [0,0,0,0,0,0]
-            let endPosRelative = endPos - currentPos
-            answer[0] = Float(endPosRelative.x); answer[1] = Float(endPosRelative.y)
+            var answer: [Float] = [0,0,0,0]
             
             let nextStep = pathfinder.dijkstra(city: city, start: start, finish: end)
             let nextCoor = nextStep.coor
             let dir = nextCoor - currentPos
             if dir == Vector2.up {
-                answer[2] = 1
+                answer[0] = 1
             } else if dir == Vector2.down {
-                answer[3] = 1
+                answer[1] = 1
             } else if dir == Vector2.left {
-                answer[4] = 1
+                answer[2] = 1
             } else if dir == Vector2.right {
-                answer[5] = 1
+                answer[3] = 1
             } else {
                 print("correctAnswer can't get a direction")
             }

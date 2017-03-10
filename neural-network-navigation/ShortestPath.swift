@@ -11,14 +11,15 @@ import Foundation
 class Pathfinder {
     // INPUTS:  city, start intersection, end intersection
     // OUTPUTS: dictionary with line segments building up the shortest path
-    func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) -> City.Intersection {
+    func dijkstra(city:City, start: City.Intersection, finish: City.Intersection) -> City.Intersection? {
         typealias Intersection = City.Intersection
         
         var intersections:[Intersection] = city.nodes.map({ $0 as! Intersection })
-        var distances:[Intersection:Double] = [:] // empty dictionary with pairs of node / distance value for the graph
-        var previousPaths:[Intersection:Intersection] = [:] // empty array with list of nodes in the shortest path
+        //print(intersections)
+        var distances = [Intersection:Double]() // empty dictionary with pairs of node / distance value for the graph
+        var previousPaths = [Intersection:Intersection?]() // empty array with list of nodes in the shortest path
         
-        let currentIntersection: Intersection = intersections[0]
+        let currentIntersection = start
         
         // set starting values for the algorithm
         for intersection in intersections {
@@ -28,22 +29,25 @@ class Pathfinder {
         
         // distance at starting intersection = 0
         distances[currentIntersection] = 0
+        //print(distances)
         
         while (intersections.count > 0) {
-            var closestNode:City.Intersection? = nil
-            var distance:Double = Double.infinity
+            var closestNode:Intersection? = nil
+            var distance = Double.infinity
             for intersection in intersections {
-                if (closestNode == nil || distance < distances[intersection]!) {
+                if (closestNode == nil || distance > distances[intersection]!) {
                     distance = distances[intersection]!
                     closestNode = intersection
+                    //print(closestNode)
                 }
             }
+            //print(distances)
             
             if (closestNode! == finish) {
                 break
             }
             
-            let nodeIndex:Int? = intersections.index(of: closestNode!)
+            let nodeIndex = intersections.index(of: closestNode!)
             intersections.remove(at: nodeIndex!)
             
             var neighbors = [Intersection]()
@@ -62,18 +66,25 @@ class Pathfinder {
             
             for neighbor in neighbors {
                 let distance = distances[closestNode!]! + 1 // assuming weight of all roads is 1
+                //print(distance)
+                //print(closestNode ?? "...")
                 if distance < distances[neighbor]! {
                     distances[neighbor]! = distance
                     previousPaths[neighbor] = closestNode!
+                    //print(previousPaths)
                 }
             }
+            //print(previousPaths)
         }
         
-        var pathVertices:[Intersection] = [finish]
-        var child = finish
+        //print(previousPaths)
+        //print(distances)
+        var pathVertices = [finish]
+        let child = finish
         while (child != start) {
-            child = previousPaths[child]!
-            pathVertices.append(child)
+            if let child = previousPaths[child], let child = child {
+                pathVertices.append(child)
+            }
         }
         
         return pathVertices[pathVertices.count - 2]

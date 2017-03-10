@@ -52,8 +52,11 @@ class Agent {
             guard let output = try? network.update(inputs: input) else { return }
             if let trainer = trainer, trainer.shouldTrainNetwork() {
                 guard let answer = trainer.correctAnswer(currentPos: currentPos, endPos: endPos) else { break }
-                if let _error = try? network.backpropagate(answer: answer) {
-                    error = _error
+                //print(answer)
+                do {
+                    error = try network.backpropagate(answer: answer)
+                } catch {
+                    //print(error)
                 }
             }
             
@@ -76,6 +79,13 @@ class Agent {
         } else {
             trainer?.tripCompleted(withTrainingError: nil)
         }
+    }
+    
+    /**
+     Use the algorithm to test if the two points have a valid path
+    */
+    func testTrip(start: Vector2, end: Vector2) -> Bool {
+        return Pathfinder().dijkstra(city: city, start: city.intersection(at: start), finish: city.intersection(at: end)) != nil
     }
     
     /**
