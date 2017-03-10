@@ -36,14 +36,14 @@ class City {
     func intersection(at coor: Vector2) -> Intersection? { return  nodes.object(at: oneDimFormula(coor: coor)) as? Intersection }
     func set(intersection: Intersection, at coor: (x: Int, y: Int)) { nodes.replaceObject(at: oneDimFormula(coor: Vector2(x: coor.x, y: coor.y)), with: intersection) }
     
-    func generate(openRoadBias: Double, delegate: CityGeneratorDelegate?) {
+    func generate(openRoadBias: Double, weights: Range, delegate: CityGeneratorDelegate?) {
         generateIntersections(delegate: delegate)
-        generateConnections(openRoadBias: openRoadBias, delegate: delegate)
+        generateConnections(openRoadBias: openRoadBias, weights: weights, delegate: delegate)
     }
     
-    func generateConnections(openRoadBias: Double, delegate: CityGeneratorDelegate?) {
-        let min = 1
-        let max = 5
+    func generateConnections(openRoadBias: Double, weights: Range, delegate: CityGeneratorDelegate?) {
+        let min = weights.min
+        let max = weights.max
         for idx in 0..<nodes.count {
             guard let node = nodes.object(at: idx) as? Intersection else { continue }
             let coor = node.coor

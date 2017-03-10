@@ -287,7 +287,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
             endingLineNumber = "102"
-            landmarkName = "fastPath(visited:city:start:end:)"
+            landmarkName = "dijkstra(city:start:finish:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
