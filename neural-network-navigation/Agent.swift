@@ -10,7 +10,7 @@ import Foundation
 
 protocol AgentTrainer {
     func shouldTrainNetwork() -> Bool
-    func correctAnswer(currentPos: Vector2, endPos: Vector2) -> [Float]
+    func correctAnswer(currentPos: Vector2, endPos: Vector2) -> [Float]?
     func tripCompleted(withTrainingError error: Float?)
 }
 
@@ -51,7 +51,8 @@ class Agent {
             let input = sense()
             guard let output = try? network.update(inputs: input) else { return }
             if let trainer = trainer, trainer.shouldTrainNetwork() {
-                if let _error = try? network.backpropagate(answer: trainer.correctAnswer(currentPos: currentPos, endPos: endPos)) {
+                guard let answer = trainer.correctAnswer(currentPos: currentPos, endPos: endPos) else { break }
+                if let _error = try? network.backpropagate(answer: answer) {
                     error = _error
                 }
             }

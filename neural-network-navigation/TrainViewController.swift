@@ -28,9 +28,13 @@ class TrainViewController: NSViewController {
         printToOutput(arg: "--date")
         let formatter = NumberFormatter()
         let times = formatter.number(fromUngrouped: timesTextField.stringValue)?.intValue ?? 1000
-        cityBuilder.trainNetwork(count: times, printer: { output in
-            self.printToOutput(output)
-        })
+        DispatchQueue.global(qos: .userInitiated).async {
+            cityBuilder.trainNetwork(count: times, printer: { output in
+                DispatchQueue.main.async {
+                    self.printToOutput(output)
+                }
+            })
+        }
     }
     
     func printToOutput(arg: String) {

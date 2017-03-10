@@ -45,7 +45,7 @@ class CityBuilder {
     
     func trainNetwork(count: Int, printer: (String) -> Void) {
         let agent = Agent(cityBuilder: self)
-        let trainer = NetworkTrainer()
+        let trainer = NetworkTrainer(city: city)
         for _ in 1...count {
             agent.newTrip()
             agent.runTrip(withTrainer: trainer, printer: printer)
@@ -56,14 +56,38 @@ class CityBuilder {
 class NetworkTrainer: AgentTrainer {
     
     var errors = [Float]()
+    var city: City
+    
+    init(city: City) { self.city = city }
     
     func shouldTrainNetwork() -> Bool {
         return true
     }
-    func correctAnswer(currentPos: Vector2, endPos: Vector2) -> [Float] {
-        
-        // Incomplete Implementation
-        return [Float]()
+    func correctAnswer(currentPos: Vector2, endPos: Vector2) -> [Float]? {
+        let pathfinder = Pathfinder()
+        if let start = city.intersection(at: currentPos), let end = city.intersection(at: endPos) {
+            var answer: [Float] = [0,0,0,0,0,0]
+            let endPosRelative = endPos - currentPos
+            answer[0] = Float(endPosRelative.x); answer[1] = Float(endPosRelative.y)
+            
+            let nextStep = pathfinder.dijkstra(city: city, start: start, finish: end)
+            let nextCoor = nextStep.coor
+            let dir = nextCoor - currentPos
+            if dir == Vector2.up {
+                answer[2] = 1
+            } else if dir == Vector2.down {
+                answer[3] = 1
+            } else if dir == Vector2.left {
+                answer[4] = 1
+            } else if dir == Vector2.right {
+                answer[5] = 1
+            } else {
+                print("correctAnswer can't get a direction")
+            }
+            return answer
+        } else {
+            return nil
+        }
     }
     func tripCompleted(withTrainingError error: Float?) {
         if let error = error { errors.append(error) }

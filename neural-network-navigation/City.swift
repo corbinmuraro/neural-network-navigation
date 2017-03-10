@@ -16,7 +16,7 @@ protocol CityGeneratorDelegate {
 
 class City {
     
-    var nodes = NSMutableArray()
+    private(set) var nodes = NSMutableArray()
     let xLim: Int
     let yLim: Int
     var size: Vector2 { return Vector2(x: xLim, y: yLim) }
