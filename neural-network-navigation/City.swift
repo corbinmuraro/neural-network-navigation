@@ -43,7 +43,7 @@ class City {
     
     func generateConnections(openRoadBias: Double, delegate: CityGeneratorDelegate?) {
         let min = 1
-        let max = 1
+        let max = 5
         for idx in 0..<nodes.count {
             guard let node = nodes.object(at: idx) as? Intersection else { continue }
             let coor = node.coor

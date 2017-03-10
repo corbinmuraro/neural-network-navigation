@@ -74,7 +74,7 @@ class Pathfinder {
                 if dir == Vector2.down { weight = closestNode!.connections.downWeight }
                 if dir == Vector2.left { weight = closestNode!.connections.leftWeight }
                 if dir == Vector2.right { weight = closestNode!.connections.rightWeight }
-                let distance = distances[closestNode!]! + Double(weight) // assuming weight of all roads is 1
+                let distance = distances[closestNode!]! + Double(weight)
                 //print(distance)
                 //print(closestNode ?? "...")
                 if distance < distances[neighbor]! {
@@ -101,7 +101,7 @@ class Pathfinder {
             }
         }
         
-        return pathVertices[pathVertices.count - 1]
+        return pathVertices[pathVertices.count - 2]
     }
     
     func fastPath(visited: inout [Vector2], city: City, start: City.Intersection, end: City.Intersection) -> Vector2 {
