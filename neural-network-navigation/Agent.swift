@@ -8,11 +8,14 @@
 
 import Foundation
 
-protocol AgentTrainer {
+protocol AgentTrainer: AgentDelegate {
     func shouldTrainNetwork() -> Bool
     func correctAnswer(currentPos: Vector2, endPos: Vector2) -> [Float]?
     func tripCompleted(withTrainingError error: Float?)
-    func tripCompleted(withDistance distance: Int)
+}
+
+protocol AgentDelegate {
+    func tripCompleted(withDistance distance: Int, stepsTaken: Int)
 }
 
 /**
@@ -23,6 +26,8 @@ class Agent {
     var cityBuilder: CityBuilder
     var city: City { return cityBuilder.city }
     var network: FFNN { return cityBuilder.network }
+    
+    var delegate: AgentDelegate?
     
     init(cityBuilder: CityBuilder) {
         self.cityBuilder = cityBuilder
@@ -50,10 +55,11 @@ class Agent {
      */
     func runTrip(withTrainer trainer: AgentTrainer?, printer: (String) -> Void) {
         var error: Float? = nil
-        var dist: Int? = nil
+        //var dist: Int? = nil
         currentPos = startPos
         printer("currentPos: \(currentPos) (endPos: \(endPos))")
         var counter = city.nodes.count * 3
+        var stepsTaken = 0
         while currentPos != endPos && counter > 0 {
             let input = sense()
             guard let output = try? network.update(inputs: input) else { return }
@@ -80,12 +86,20 @@ class Agent {
                 break
             }
             counter -= 1
+            stepsTaken += 1
         }
         printer("At end. currentPos: \(currentPos) (endPos: \(endPos))")
-        if let trainer = trainer, trainer.shouldTrainNetwork() {
-            trainer.tripCompleted(withTrainingError: error)
-            let distance = endPos.distance(to: currentPos)
-            trainer.tripCompleted(withDistance: distance)
+        let distance = endPos.distance(to: currentPos)
+        #if DEBUG
+            print("currentPos: \(currentPos), endPos: \(endPos)")
+            print("Trip completed with distance: \(distance)")
+        #endif
+        delegate?.tripCompleted(withDistance: distance, stepsTaken: stepsTaken)
+        if let trainer = trainer {
+            if trainer.shouldTrainNetwork() {
+                trainer.tripCompleted(withTrainingError: error)
+            }
+            trainer.tripCompleted(withDistance: distance, stepsTaken: stepsTaken)
         } else {
             trainer?.tripCompleted(withTrainingError: nil)
         }

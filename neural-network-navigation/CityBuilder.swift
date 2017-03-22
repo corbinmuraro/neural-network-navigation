@@ -47,7 +47,9 @@ class CityBuilder {
         let agent = Agent(cityBuilder: self)
         let trainer = NetworkTrainer(city: city)
         for _ in 1...count {
+            #if DEBUG
             print("new Trip")
+            #endif
             agent.newTrip()
             agent.runTrip(withTrainer: trainer, printer: printer)
             trainer.visited.removeAll()
@@ -56,6 +58,34 @@ class CityBuilder {
         printer("\(trainer.errors)")
         printer("Distance of all training trials")
         printer("\(trainer.distances)")
+    }
+    
+    func batchTrip(count: Int, withTrainInterval interval: Int?, trainCount: Int?, trainer: NetworkTrainer?, controller: inout BatchTripController, printer: (String) -> Void, completion: () -> Void) {
+        for _ in 1...count {
+            let agent = Agent(cityBuilder: self)
+            agent.delegate = controller
+//            if let interval = interval, let trainCount = trainCount, count % interval == 0 {
+//                for _ in 1...trainCount {
+//                    agent.newTrip()
+//                    agent.runTrip(withTrainer: trainer, printer: printer)
+//                    trainer?.visited.removeAll()
+//                }
+//            } else {
+                agent.newTrip()
+                agent.runTrip(withTrainer: nil, printer: printer)
+//            }
+        }
+        completion()
+    }
+}
+
+class BatchTripController: AgentDelegate {
+    var distances = [Int]()
+    var stepsTakens = [Int]()
+    
+    func tripCompleted(withDistance distance: Int, stepsTaken: Int) {
+        distances.append(distance)
+        stepsTakens.append(stepsTaken)
     }
 }
 
@@ -111,7 +141,7 @@ class NetworkTrainer: AgentTrainer {
         if let error = error { errors.append(error) }
     }
     
-    func tripCompleted(withDistance distance: Int) {
+    func tripCompleted(withDistance distance: Int, stepsTaken: Int) {
         distances.append(distance)
     }
     
